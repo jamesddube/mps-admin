@@ -156,6 +156,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * MPS Specific Service Providers
+         */
+        Dingo\Api\Provider\LaravelServiceProvider::class
     ],
 
     /*
@@ -170,7 +174,8 @@ return [
     */
 
     'aliases' => [
-
+        
+        'Api'       => Dingo\Api\Facade\API::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
