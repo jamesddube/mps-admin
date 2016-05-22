@@ -14,7 +14,7 @@ use OAuth2\GrantType\ClientCredentials;
 use OAuth2\GrantType\RefreshToken;
 use OAuth2\GrantType\UserCredentials;
 use OAuth2\Server as Oauth2Server;
-use OAuth2\Storage\Pdo;
+use OAuth2\Storage\Pdo as py;
 
 class Server
 {
@@ -24,7 +24,7 @@ class Server
         App::singleton('oauth2' , function ()
         {
             $pdo = DB::connection()->getPdo();
-            $storage = new Pdo(array('dsn' => "mysql:dbname=".env('DB_DATABASE')."",'host=localhost' , 'username' => 'root' , 'password' => 'sead2301'));
+            $storage = new py(array('dsn' => "mysql:dbname=".env('DB_DATABASE')."",'host=localhost' , 'username' => 'root' , 'password' => 'sead2301'));
             $server = new Oauth2Server($storage);
 
             $server->addGrantType(new ClientCredentials($storage));

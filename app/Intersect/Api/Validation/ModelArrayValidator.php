@@ -22,6 +22,8 @@ abstract class ModelArrayValidator
     protected $required = [];
 
     protected $errors;
+    
+    protected $messages;
 
     protected $messageBag;
 
@@ -39,6 +41,11 @@ abstract class ModelArrayValidator
         return array();
     }
 
+    protected function messages()
+    {
+        return array();
+    }
+
     public function validate(array $request)
     {
         $this->request = $request;
@@ -51,13 +58,13 @@ abstract class ModelArrayValidator
             {
                 if ( $collection->contains($key) === false )
                 {
-                    throw new ApiException("key attribute $key not found" , 400);
+                    throw new BadRequestHttpException("key attribute $key not found");
                 }
             }
 
             foreach ($request[ $this->key ] as $order)
             {
-                $v = Validator::make($order , $this->rules());
+                $v = Validator::make($order , $this->rules(),$this->messages());
 
                 if ( $v->fails() )
                 {

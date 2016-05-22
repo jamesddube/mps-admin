@@ -13,7 +13,9 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\User;
 use Carbon\Carbon;
+use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Exception\ValidationHttpException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +25,7 @@ use Intersect\Api\Validation\ModelArrayValidator;
 use JavaScript;
 use Symfony\Component\Debug\Exception\ClassNotFoundException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ApiController extends Controller
 {
@@ -30,6 +33,8 @@ class ApiController extends Controller
     protected $model;
     protected $requestValidator;
     protected $modelArray;
+    /** @var  Model $instance */
+    protected $instance;
 
     public function __construct()
     {
@@ -114,32 +119,21 @@ class ApiController extends Controller
 
     public function store(Request $request)
     {
+        $this->runValidation($request);
 
-        $validator = new $this->modelArray($request);
+        $data = $request->input($this->getModelArrayKey());
 
-        $validator->validate($request->all());
+        $models = $this->getModelCollection($data)->toArray();
 
-        if(count($validator->getErrors()) === 0)
-        {
-            $model = new $this->model;
+        DB::transaction(function () use ($models) {
+            DB::table($this->getInstance()->getTable())->insert($models);
+        });
 
-            $key = $this->getModelArrayKey();
+        return response()->json(["message"=>"entity processed"] , 201);
 
-            $data = $request->input($key);
-
-            if(DB::table($model->getTable())->insert($data))
-            {
-                return response()->json(["message"=>"entity processed"] , 201);
-            }
-
-        }
-        else
-        {
-            throw new ValidationHttpException($validator->getMessageBag());
-        }
     }
 
-    private function setModelArray($string)
+    protected function setModelArray($string)
     {
         if (class_exists($string))
         {
@@ -149,7 +143,7 @@ class ApiController extends Controller
 
     }
 
-    private function getModelArrayKey()
+    protected function getModelArrayKey()
     {
         $m = new $this->modelArray();
 
@@ -165,8 +159,61 @@ class ApiController extends Controller
 
     public function getUpdated(Request $request)
     {
-        return $this->model::Unsynced(Carbon::now())->get();
+        //return $this->model::Unsynced($request->input('date'))->get();
         //$model::where('updated_at','>',$date)->get();
     }
+
+    public function runValidation(Array $request)
+    {
+        $this->boot();
+
+        $validator = new $this->modelArray();
+
+        $validator->validate($request);
+
+        if(count($validator->getErrors()) > 0)
+        {
+            throw new ValidationHttpException($validator->getErrors());
+        }
+    }
+
+    public function boot()
+    {
+        $model = new $this->model;
+
+        $key = $this->getModelArrayKey();
+    }
+
+    /**
+     *
+     * Builds an Array of Models to insert to the
+     * database
+     *
+     * @param array $models
+     * @return Collection
+     */
+    public function getModelCollection(Array $models)
+    {
+        $orderCollection = new Collection();
+
+        foreach ($models as $model)
+        {
+            $orderCollection->add(new $this->model($model));
+        }
+
+        return ($orderCollection);
+    }
+
+    public function getInstance()
+    {
+        if($this->instance == null)
+        {
+            $this->instance = new $this->model;
+        }
+
+        return $this->instance;
+    }
+
+
 
 }

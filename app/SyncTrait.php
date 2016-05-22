@@ -11,9 +11,9 @@ namespace App;
 
 trait SyncTrait
 {
-    public function scopeUnsynced($query,$date)
+    public function scopeUnsynced($query,$date = null)
     {
-        return $query->where('updated_at','>',$date);
+        return is_null($date) ? $query : $query->where('updated_at','>',$date);
     }
 
 }

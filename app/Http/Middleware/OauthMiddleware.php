@@ -21,7 +21,7 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-
+        return $next($request);
        if(!$request->has('access_token'))
         {
             throw new BadRequestHttpException('access token not found');
@@ -39,8 +39,7 @@ class OauthMiddleware
             {
                 if($response->getParameter('error') == 'expired_token')
                 {
-                    new BadRequestHttpException("the token has expired");
-                    //return $response->send();
+                    throw new BadRequestHttpException("the access token has expired");
                 }
 
                 throw new BadRequestHttpException('the access token provided is invalid');

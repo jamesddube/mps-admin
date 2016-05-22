@@ -16,7 +16,8 @@ class Order extends Model
             'user_id',
             'customer_id',
             'order_status_id',
-            'sync_id'
+            'sync_id',
+            'order_date'
         ];
     //
     public function lineItems()
@@ -46,6 +47,7 @@ class Order extends Model
                     ->orderBy('orders_count','desc')
                     ->get();
     }
+
     
     
 

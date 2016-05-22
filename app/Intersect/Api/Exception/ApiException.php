@@ -9,21 +9,12 @@
 namespace Intersect\Api\Exception;
 
 
-use \Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class ApiException extends Exception
+class ApiException extends HttpException
 {
-    // Redefine the exception so message isn't optional
-    public function __construct($message, $code = 500, Exception $previous = null) {
-        // some code
-
-        // make sure everything is assigned properly
-        parent::__construct($message, $code, $previous);
+    public function __construct($statusCode, $message, \Exception $previous, array $headers, $code)
+    {
+        parent::__construct($statusCode, $message, $previous, $headers, $code);
     }
-
-    // custom string representation of object
-    public function __toString() {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
-    }
-
 }

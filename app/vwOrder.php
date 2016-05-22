@@ -20,6 +20,14 @@ class vwOrder extends Model
         "sync_status",
     ];
 
+    protected $dates = ['date'];
+
+    public function getDateAttribute($date)
+    {
+        $date = new Carbon($date);
+        return $date->diffForHumans();
+    }
+
     public function lineItems()
     {
         return $this->hasMany('App\vwOrderDetail','order_id');

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','Users')
+@section('title','Sales Reps')
 @section('header')
 @parent
         <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -16,7 +16,7 @@
         <!-- begin col-12 -->
         <div class="col-md-12">
         <ul class="nav nav-pills">
-            <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">users</a></li>
+            <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">Sales Reps</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active in" id="nav-pills-tab-1">
@@ -39,7 +39,7 @@
                         <td>{{ $user->surname }}</td>
                         <td>{{ $user->job_title }}</td>
                         <td>{{ $user->user_type }}</td>
-                        <td><a href="{{ url('users/'.$user->id) }}" class="btn btn-sm btn-inverse">
+                        <td><a href="{{ url('salesreps/'.$user->id) }}" class="btn btn-sm btn-inverse">
                                 <i class="fa fa-search pull-left"></i>
                                 View<br />
                             </a></td>

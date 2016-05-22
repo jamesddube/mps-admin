@@ -22,6 +22,16 @@ class OrderArray extends ModelArrayValidator
             'order_details'
         ];
 
+    protected function messages()
+    {
+        return
+            [
+                'id.in' => "all orders must have order details",
+                'user_id.in'=>"only sales reps can make orders"
+            ];
+    }
+
+
     protected function rules()
     {
         $id_array = KeyArray::getArray($this->request['order_details'],'order_id');
@@ -30,9 +40,9 @@ class OrderArray extends ModelArrayValidator
             [
                 'id' => "required|unique:orders,id|in:".implode(',',$id_array),
                 'sync_id' => 'required',
-                'customer_id' => 'exists:customers,id',
+                'customer_id' => 'required|exists:customers,id',
                 'order_status_id' => 'required',
-                'user_id' => 'exists:users,id'
+                'user_id' => 'required|exists:users,id',
             ];
     }
 }

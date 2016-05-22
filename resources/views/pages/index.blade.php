@@ -17,7 +17,7 @@
         <div class="widget widget-stats bg-blue">
             <div class="stats-icon stats-icon-lg"><i class="fa fa-trophy fa-fw"></i></div>
             <div class="stats-title">WEEKLY BESTSELLER</div>
-            <div class="stats-number">{{ $topProduct->description }}</div>
+            <div class="stats-number">{{ substr($topProduct->description,0,3) }}</div>
             <div class="stats-desc">Quantity sold this week ({{$topProduct->quantity}})</div>
         </div>
     </div>

@@ -35,6 +35,8 @@ use Illuminate\Support\Facades\App;
         Route::resource('products' , 'ProductController');
         Route::resource('customers' , 'CustomerController');
         Route::resource('users' , 'UserController');
+        Route::get('salesreps' , 'UserController@salesReps');
+        Route::get('salesreps/{id}' , 'UserController@salesRepsShow');
         
         // Authentication routes...
         Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -51,12 +53,19 @@ use Illuminate\Support\Facades\App;
         });
         
         Route::get('email/{email}','EmailController@send');
-        Route::get('test','Api\SyncController@getUpdated');
+        Route::post('test',function($id){
+
+           return ['name'=>$id];
+        });
 
         
         
         $api->version('v1', function ($api)
         {
+            $api->post('test',function(\Illuminate\Http\Request $request){
+
+                return ['name'=>$request->toArray()];
+            });
             $api->get('test','App\Http\Controllers\Api\OrderController@getUpdated');
             //Test Api
             $api->get('check',function(){ return ["message" => "success"];});
@@ -65,7 +74,7 @@ use Illuminate\Support\Facades\App;
             $api->post('oauth/token', 'App\Http\Controllers\Api\OauthController@getToken');
         
             $api->group(['middleware' => 'oauth'], function($api){
-        
+
                 $api->resource('/orders' , 'App\Http\Controllers\Api\OrderController');
                 $api->resource('/users' , 'App\Http\Controllers\Api\UserController');
                 $api->resource('/products' , 'App\Http\Controllers\Api\ProductController');

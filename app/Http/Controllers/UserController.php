@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Repositories\SalesRepRepository;
 use DB;
-use App\User;
+use App\vwUser;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //get all the users
+        $users = vwUser::all();
+        
+        return view ('users.index',compact('users'));
     }
 
     /**
@@ -110,5 +114,19 @@ class UserController extends Controller
             }
         }
         else throw new BadRequestHttpException('no image found');
+    }
+    
+    public function salesReps()
+    {
+        $users =  vwUser::reps()->get();
+
+        return view ('sales_reps.index',compact('users'));
+    }
+
+    public function salesRepsShow($id)
+    {
+        $user =  SalesRepRepository::show($id);
+
+        return view ('sales_reps.show',compact('user'));
     }
 }
