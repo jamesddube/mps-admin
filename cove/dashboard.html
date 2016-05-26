@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/mps/app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/nv.d3.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="index.html">/var/www/html/mps/app</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Analytics.php.html#16">Analytics</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Server.php.html#19">Server</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Sync/Syncable.php.html#8">Syncable</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Sales.php.html#15">Sales</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/SalesRepRepository.php.html#16">SalesRepRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Promotions.php.html#12">Promotions</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/RequestValidator.php.html#16">RequestValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelValidators/OrderArray.php.html#15">OrderArray</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#16">ModelArrayValidator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Support/KeyArray.php.html#14">KeyArray</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Response/Json.php.html#14">Json</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#13">QueryBuilder</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SyncTrait.php.html#12">SyncTrait</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Console/Commands/Inspire.php.html#8">Inspire</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/CreateOrderRequest.php.html#7">CreateOrderRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Middleware/RedirectIfAuthenticated.php.html#8">RedirectIfAuthenticated</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Middleware/Authenticate.php.html#8">Authenticate</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/PasswordController.php.html#8">PasswordController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/AuthController.php.html#11">AuthController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#17">UserController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Controller/SyncController.php.html#14">SyncController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HelperFunctions.php.html#12">HelperFunctions</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Middleware/OauthMiddleware.php.html#12">OauthMiddleware</a></td><td class="text-right">15%</td></tr>
+       <tr><td><a href="Exceptions/Handler.php.html#12">Handler</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Pdo.php.html#14">Pdo</a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="Intersect/Api/Controller/ApiController.php.html#30">ApiController</a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Analytics.php.html#16">Analytics</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#17">UserController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#16">ModelArrayValidator</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#13">QueryBuilder</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Intersect/Api/Response/Json.php.html#14">Json</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Http/Middleware/OauthMiddleware.php.html#12">OauthMiddleware</a></td><td class="text-right">27</td></tr>
+       <tr><td><a href="Intersect/Api/Controller/ApiController.php.html#30">ApiController</a></td><td class="text-right">24</td></tr>
+       <tr><td><a href="Http/Middleware/Authenticate.php.html#8">Authenticate</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/RequestValidator.php.html#16">RequestValidator</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Http/Requests/CreateOrderRequest.php.html#7">CreateOrderRequest</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Http/Middleware/RedirectIfAuthenticated.php.html#8">RedirectIfAuthenticated</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SyncTrait.php.html#12">SyncTrait</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Pdo.php.html#14">Pdo</a></td><td class="text-right">5</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Analytics.php.html#20"><abbr title="Analytics::date">date</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#49"><abbr title="ModelArrayValidator::validate">validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/CreateOrderRequest.php.html#14"><abbr title="CreateOrderRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Requests/CreateOrderRequest.php.html#24"><abbr title="CreateOrderRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Server.php.html#24"><abbr title="Server::anonymous function">anonymous function</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Server.php.html#40"><abbr title="Server::getServerInstance">getServerInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#21"><abbr title="QueryBuilder::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#26"><abbr title="QueryBuilder::applyFilters">applyFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#35"><abbr title="QueryBuilder::applyParameters">applyParameters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#47"><abbr title="QueryBuilder::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Response/Json.php.html#16"><abbr title="Json::response">response</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Support/KeyArray.php.html#18"><abbr title="KeyArray::getArray">getArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Support/KeyArray.php.html#24"><abbr title="KeyArray::anonymous function">anonymous function</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#30"><abbr title="ModelArrayValidator::getKey">getKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#39"><abbr title="ModelArrayValidator::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#44"><abbr title="ModelArrayValidator::messages">messages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#94"><abbr title="ModelArrayValidator::getErrors">getErrors</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#26"><abbr title="Analytics::getDate">getDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#99"><abbr title="ModelArrayValidator::getMessageBag">getMessageBag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelValidators/OrderArray.php.html#25"><abbr title="OrderArray::messages">messages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelValidators/OrderArray.php.html#35"><abbr title="OrderArray::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/RequestValidator.php.html#27"><abbr title="RequestValidator::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/RequestValidator.php.html#32"><abbr title="RequestValidator::checkRequired">checkRequired</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Promotions.php.html#15"><abbr title="Promotions::getCustomerSpecificPromotions">getCustomerSpecificPromotions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Promotions.php.html#20"><abbr title="Promotions::getExcludedCustomers">getExcludedCustomers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Promotions.php.html#25"><abbr title="Promotions::getRetailerPromotions">getRetailerPromotions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Promotions.php.html#30"><abbr title="Promotions::getWholesalerPromotions">getWholesalerPromotions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/SalesRepRepository.php.html#19"><abbr title="SalesRepRepository::all">all</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/SalesRepRepository.php.html#24"><abbr title="SalesRepRepository::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Sales.php.html#17"><abbr title="Sales::getSalesByCategory">getSalesByCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Sales.php.html#36"><abbr title="Sales::topSalesByCategory">topSalesByCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Sync/Syncable.php.html#10"><abbr title="Syncable::sync">sync</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Middleware/RedirectIfAuthenticated.php.html#18"><abbr title="RedirectIfAuthenticated::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SyncTrait.php.html#14"><abbr title="SyncTrait::scopeUnsynced">scopeUnsynced</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Middleware/Authenticate.php.html#18"><abbr title="Authenticate::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#64"><abbr title="Analytics::getWeeklySales">getWeeklySales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Console/Commands/Inspire.php.html#29"><abbr title="Inspire::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#95"><abbr title="Analytics::getTotalQuantityBy">getTotalQuantityBy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#79"><abbr title="Analytics::getTopProduct">getTopProduct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#73"><abbr title="Analytics::getYearlyOrders">getYearlyOrders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#70"><abbr title="Analytics::getYearlySales">getYearlySales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#67"><abbr title="Analytics::getWeeklyOrders">getWeeklyOrders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#56"><abbr title="Analytics::getDailyOrders">getDailyOrders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HelperFunctions.php.html#14"><abbr title="HelperFunctions::StartDate">StartDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#49"><abbr title="Analytics::getDailySales">getDailySales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#46"><abbr title="Analytics::getYearEndDate">getYearEndDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#43"><abbr title="Analytics::getYearStartDate">getYearStartDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#40"><abbr title="Analytics::getMonthEndDate">getMonthEndDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#37"><abbr title="Analytics::getMonthStartDate">getMonthStartDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#34"><abbr title="Analytics::getWeekEndDate">getWeekEndDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#31"><abbr title="Analytics::getWeekStartDate">getWeekStartDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Exceptions/Handler.php.html#46"><abbr title="Handler::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Intersect/Api/Controller/SyncController.php.html#23"><abbr title="SyncController::getUpdated">getUpdated</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/PasswordController.php.html#28"><abbr title="PasswordController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#106"><abbr title="UserController::uploadAvatar">uploadAvatar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/AuthController.php.html#64"><abbr title="AuthController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/AuthController.php.html#49"><abbr title="AuthController::validator">validator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/AuthController.php.html#38"><abbr title="AuthController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#126"><abbr title="UserController::salesRepsShow">salesRepsShow</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#26"><abbr title="UserController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#119"><abbr title="UserController::salesReps">salesReps</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#101"><abbr title="UserController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#90"><abbr title="UserController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#78"><abbr title="UserController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#67"><abbr title="UserController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#53"><abbr title="UserController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#39"><abbr title="UserController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Middleware/OauthMiddleware.php.html#22"><abbr title="OauthMiddleware::handle">handle</abbr></a></td><td class="text-right">15%</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Pdo.php.html#36"><abbr title="Pdo::getUser">getUser</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Pdo.php.html#24"><abbr title="Pdo::checkUserCredentials">checkUserCredentials</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Intersect/Api/Controller/ApiController.php.html#136"><abbr title="ApiController::setModelArray">setModelArray</abbr></a></td><td class="text-right">75%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#49"><abbr title="ModelArrayValidator::validate">validate</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Intersect/Api/Response/Json.php.html#16"><abbr title="Json::response">response</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Http/Middleware/OauthMiddleware.php.html#22"><abbr title="OauthMiddleware::handle">handle</abbr></a></td><td class="text-right">27</td></tr>
+       <tr><td><a href="Http/Middleware/Authenticate.php.html#18"><abbr title="Authenticate::handle">handle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/RequestValidator.php.html#32"><abbr title="RequestValidator::checkRequired">checkRequired</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Http/Controllers/UserController.php.html#106"><abbr title="UserController::uploadAvatar">uploadAvatar</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Analytics.php.html#20"><abbr title="Analytics::date">date</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#26"><abbr title="QueryBuilder::applyFilters">applyFilters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Intersect/Api/Validation/ModelArrayValidator.php.html#30"><abbr title="ModelArrayValidator::getKey">getKey</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Intersect/Api/Request/QueryBuilder.php.html#35"><abbr title="QueryBuilder::applyParameters">applyParameters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SyncTrait.php.html#14"><abbr title="SyncTrait::scopeUnsynced">scopeUnsynced</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Analytics.php.html#26"><abbr title="Analytics::getDate">getDate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Http/Requests/CreateOrderRequest.php.html#24"><abbr title="CreateOrderRequest::rules">rules</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Http/Middleware/RedirectIfAuthenticated.php.html#18"><abbr title="RedirectIfAuthenticated::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Analytics.php.html#95"><abbr title="Analytics::getTotalQuantityBy">getTotalQuantityBy</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Pdo.php.html#36"><abbr title="Pdo::getUser">getUser</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Intersect/Api/Oauth/Pdo.php.html#24"><abbr title="Pdo::checkUserCredentials">checkUserCredentials</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Intersect/Api/Controller/ApiController.php.html#136"><abbr title="ApiController::setModelArray">setModelArray</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 3.3.1</a> using <a href="https://secure.php.net/" target="_top">PHP 7.0.4-7ubuntu2</a> and <a href="https://phpunit.de/">PHPUnit 5.1.3</a> at Sun May 22 21:24:01 CAT 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="js/holder.min.js" type="text/javascript"></script>
+  <script src="js/d3.min.js" type="text/javascript"></script>
+  <script src="js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([22,0,1,0,0,0,0,1,1,1,0,49], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([67,0,1,0,0,0,0,2,1,0,1,122], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,19,"<a href=\"Analytics.php.html#16\">Analytics<\/a>"],[100,7,"<a href=\"AximosCustomers.php.html#11\">AximosCustomers<\/a>"],[100,0,"<a href=\"AximosProduct.php.html#7\">AximosProduct<\/a>"],[0,1,"<a href=\"Console\/Commands\/Inspire.php.html#8\">Inspire<\/a>"],[100,0,"<a href=\"Http\/Kernel.php.html#8\">Kernel<\/a>"],[100,2,"<a href=\"Customer.php.html#7\">Customer<\/a>"],[100,0,"<a href=\"Events\/Event.php.html#5\">Event<\/a>"],[66.666666666667,2,"<a href=\"Exceptions\/Handler.php.html#12\">Handler<\/a>"],[0,1,"<a href=\"HelperFunctions.php.html#12\">HelperFunctions<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AnalyticsController.php.html#14\">AnalyticsController<\/a>"],[100,41,"<a href=\"Http\/Controllers\/Api.php.html#19\">Api<\/a>"],[100,7,"<a href=\"Http\/Controllers\/CustomerController.php.html#11\">CustomerController<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api\/OauthController.php.html#16\">OauthController<\/a>"],[100,8,"<a href=\"Http\/Controllers\/OrderController.php.html#13\">OrderController<\/a>"],[100,0,"<a href=\"Http\/Controllers\/Api\/OrderDetailController.php.html#12\">OrderDetailController<\/a>"],[100,7,"<a href=\"Http\/Controllers\/ProductController.php.html#10\">ProductController<\/a>"],[100,0,"<a href=\"Http\/Controllers\/Api\/SalesController.php.html#10\">SalesController<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api\/SampleController.php.html#17\">SampleController<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Controller\/SyncController.php.html#14\">SyncController<\/a>"],[0,12,"<a href=\"Http\/Controllers\/UserController.php.html#17\">UserController<\/a>"],[0,3,"<a href=\"Http\/Controllers\/Auth\/AuthController.php.html#11\">AuthController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/Auth\/PasswordController.php.html#8\">PasswordController<\/a>"],[100,0,"<a href=\"Http\/Controllers\/Controller.php.html#11\">Controller<\/a>"],[100,10,"<a href=\"Http\/Controllers\/DashboardController.php.html#21\">DashboardController<\/a>"],[100,2,"<a href=\"Http\/Controllers\/EmailController.php.html#10\">EmailController<\/a>"],[100,0,"<a href=\"Sample.php.html#14\">Sample<\/a>"],[0,4,"<a href=\"Http\/Middleware\/Authenticate.php.html#8\">Authenticate<\/a>"],[100,0,"<a href=\"Http\/Middleware\/EncryptCookies.php.html#7\">EncryptCookies<\/a>"],[15.384615384615,6,"<a href=\"Http\/Middleware\/OauthMiddleware.php.html#12\">OauthMiddleware<\/a>"],[0,2,"<a href=\"Http\/Middleware\/RedirectIfAuthenticated.php.html#8\">RedirectIfAuthenticated<\/a>"],[100,0,"<a href=\"Http\/Middleware\/VerifyCsrfToken.php.html#7\">VerifyCsrfToken<\/a>"],[0,3,"<a href=\"Http\/Requests\/CreateOrderRequest.php.html#7\">CreateOrderRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/CreateUserRequest.php.html#7\">CreateUserRequest<\/a>"],[100,0,"<a href=\"Http\/Requests\/Request.php.html#7\">Request<\/a>"],[88.235294117647,24,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#30\">ApiController<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Exception\/ApiException.php.html#14\">ApiException<\/a>"],[77.777777777778,5,"<a href=\"Intersect\/Api\/Oauth\/Pdo.php.html#14\">Pdo<\/a>"],[0,3,"<a href=\"Intersect\/Api\/Oauth\/Server.php.html#19\">Server<\/a>"],[100,0,"<a href=\"Intersect\/Api\/Request\/OrderQueryBuilder.php.html#12\">OrderQueryBuilder<\/a>"],[0,6,"<a href=\"Intersect\/Api\/Request\/QueryBuilder.php.html#13\">QueryBuilder<\/a>"],[0,5,"<a href=\"Intersect\/Api\/Response\/Json.php.html#14\">Json<\/a>"],[0,2,"<a href=\"Intersect\/Api\/Support\/KeyArray.php.html#14\">KeyArray<\/a>"],[0,12,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#16\">ModelArrayValidator<\/a>"],[100,0,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/CustomerArray.php.html#14\">CustomerArray<\/a>"],[0,2,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/OrderArray.php.html#15\">OrderArray<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/OrderDetailArray.php.html#14\">OrderDetailArray<\/a>"],[100,0,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/ProductArray.php.html#14\">ProductArray<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/UserArray.php.html#15\">UserArray<\/a>"],[0,4,"<a href=\"Intersect\/Api\/Validation\/RequestValidator.php.html#16\">RequestValidator<\/a>"],[100,0,"<a href=\"Intersect\/Api\/Validation\/RequestValidators\/OrderRequest.php.html#14\">OrderRequest<\/a>"],[100,0,"<a href=\"Intersect\/Api\/Validation\/RequestValidators\/UserRequest.php.html#14\">UserRequest<\/a>"],[100,0,"<a href=\"Jobs\/Job.php.html#7\">Job<\/a>"],[100,5,"<a href=\"Order.php.html#9\">Order<\/a>"],[100,0,"<a href=\"OrderDetail.php.html#7\">OrderDetail<\/a>"],[100,0,"<a href=\"Product.php.html#7\">Product<\/a>"],[100,26,"<a href=\"Promotion.php.html#9\">Promotion<\/a>"],[100,0,"<a href=\"PromotionCustomer.php.html#7\">PromotionCustomer<\/a>"],[100,0,"<a href=\"PromotionProduct.php.html#7\">PromotionProduct<\/a>"],[0,4,"<a href=\"Promotions.php.html#12\">Promotions<\/a>"],[100,2,"<a href=\"Providers\/AppServiceProvider.php.html#7\">AppServiceProvider<\/a>"],[100,1,"<a href=\"Providers\/AuthServiceProvider.php.html#8\">AuthServiceProvider<\/a>"],[100,1,"<a href=\"Providers\/EventServiceProvider.php.html#8\">EventServiceProvider<\/a>"],[100,4,"<a href=\"Providers\/RouteServiceProvider.php.html#8\">RouteServiceProvider<\/a>"],[0,2,"<a href=\"Repositories\/SalesRepRepository.php.html#16\">SalesRepRepository<\/a>"],[0,2,"<a href=\"Sales.php.html#15\">Sales<\/a>"],[100,3,"<a href=\"SalesRep.php.html#7\">SalesRep<\/a>"],[100,0,"<a href=\"User.php.html#7\">User<\/a>"],[100,1,"<a href=\"UserType.php.html#7\">UserType<\/a>"],[100,2,"<a href=\"vwCustomer.php.html#7\">vwCustomer<\/a>"],[100,9,"<a href=\"vwOrder.php.html#8\">vwOrder<\/a>"],[100,1,"<a href=\"vwOrderDetail.php.html#7\">vwOrderDetail<\/a>"],[100,0,"<a href=\"vwProduct.php.html#7\">vwProduct<\/a>"],[100,1,"<a href=\"vwUser.php.html#7\">vwUser<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Sync\/Syncable.php.html#8\">Syncable<\/a>"],[0,2,"<a href=\"SyncTrait.php.html#12\">SyncTrait<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"Analytics.php.html#20\">Analytics::date<\/a>"],[0,2,"<a href=\"Analytics.php.html#26\">Analytics::getDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#31\">Analytics::getWeekStartDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#34\">Analytics::getWeekEndDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#37\">Analytics::getMonthStartDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#40\">Analytics::getMonthEndDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#43\">Analytics::getYearStartDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#46\">Analytics::getYearEndDate<\/a>"],[0,1,"<a href=\"Analytics.php.html#49\">Analytics::getDailySales<\/a>"],[0,1,"<a href=\"Analytics.php.html#56\">Analytics::getDailyOrders<\/a>"],[0,1,"<a href=\"Analytics.php.html#64\">Analytics::getWeeklySales<\/a>"],[0,1,"<a href=\"Analytics.php.html#67\">Analytics::getWeeklyOrders<\/a>"],[0,1,"<a href=\"Analytics.php.html#70\">Analytics::getYearlySales<\/a>"],[0,1,"<a href=\"Analytics.php.html#73\">Analytics::getYearlyOrders<\/a>"],[0,1,"<a href=\"Analytics.php.html#79\">Analytics::getTopProduct<\/a>"],[0,2,"<a href=\"Analytics.php.html#95\">Analytics::getTotalQuantityBy<\/a>"],[100,1,"<a href=\"AximosCustomers.php.html#26\">AximosCustomers::getRetailers<\/a>"],[100,1,"<a href=\"AximosCustomers.php.html#31\">AximosCustomers::getWholesalers<\/a>"],[100,1,"<a href=\"AximosCustomers.php.html#36\">AximosCustomers::getActivePromotions<\/a>"],[100,2,"<a href=\"AximosCustomers.php.html#43\">AximosCustomers::getPromotions<\/a>"],[100,2,"<a href=\"AximosCustomers.php.html#48\">AximosCustomers::anonymous function<\/a>"],[0,1,"<a href=\"Console\/Commands\/Inspire.php.html#29\">Inspire::handle<\/a>"],[100,1,"<a href=\"Customer.php.html#28\">Customer::orders<\/a>"],[100,1,"<a href=\"Customer.php.html#33\">Customer::recentOrders<\/a>"],[100,1,"<a href=\"Exceptions\/Handler.php.html#34\">Handler::report<\/a>"],[0,1,"<a href=\"Exceptions\/Handler.php.html#46\">Handler::render<\/a>"],[0,1,"<a href=\"HelperFunctions.php.html#14\">HelperFunctions::StartDate<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AnalyticsController.php.html#17\">AnalyticsController::Dashboard<\/a>"],[100,3,"<a href=\"Http\/Controllers\/Api.php.html#39\">Api::isJson<\/a>"],[100,5,"<a href=\"Http\/Controllers\/Api.php.html#50\">Api::validateProperties<\/a>"],[100,3,"<a href=\"Http\/Controllers\/Api.php.html#86\">Api::validateModel<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api.php.html#95\">Api::setModelAttributes<\/a>"],[100,5,"<a href=\"Http\/Controllers\/Api.php.html#100\">Api::filterModelAttributes<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api.php.html#118\">Api::hasLineItems<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api.php.html#130\">Api::setAttributes<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api.php.html#143\">Api::genMessage<\/a>"],[100,3,"<a href=\"Http\/Controllers\/Api.php.html#158\">Api::getModelsFromJson<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api.php.html#179\">Api::getObject<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api.php.html#186\">Api::getObjectAttribute<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api.php.html#195\">Api::all<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Api.php.html#200\">Api::validationErrors<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api.php.html#217\">Api::getModelAttributes<\/a>"],[100,7,"<a href=\"Http\/Controllers\/Api.php.html#228\">Api::sample<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#18\">CustomerController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#30\">CustomerController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#41\">CustomerController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#52\">CustomerController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#66\">CustomerController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#78\">CustomerController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/CustomerController.php.html#89\">CustomerController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api\/OauthController.php.html#18\">OauthController::getToken<\/a>"],[100,1,"<a href=\"Http\/Controllers\/OrderController.php.html#21\">OrderController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/OrderController.php.html#34\">OrderController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/OrderController.php.html#46\">OrderController::store<\/a>"],[100,2,"<a href=\"Http\/Controllers\/OrderController.php.html#58\">OrderController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/OrderController.php.html#76\">OrderController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/OrderController.php.html#89\">OrderController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/OrderController.php.html#101\">OrderController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#17\">ProductController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#30\">ProductController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#41\">ProductController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#52\">ProductController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#63\">ProductController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#75\">ProductController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProductController.php.html#86\">ProductController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Api\/SampleController.php.html#19\">SampleController::index<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Controller\/SyncController.php.html#23\">SyncController::getUpdated<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#26\">UserController::index<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#39\">UserController::create<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#53\">UserController::store<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#67\">UserController::show<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#78\">UserController::edit<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#90\">UserController::update<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#101\">UserController::destroy<\/a>"],[0,3,"<a href=\"Http\/Controllers\/UserController.php.html#106\">UserController::uploadAvatar<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#119\">UserController::salesReps<\/a>"],[0,1,"<a href=\"Http\/Controllers\/UserController.php.html#126\">UserController::salesRepsShow<\/a>"],[0,1,"<a href=\"Http\/Controllers\/Auth\/AuthController.php.html#38\">AuthController::__construct<\/a>"],[0,1,"<a href=\"Http\/Controllers\/Auth\/AuthController.php.html#49\">AuthController::validator<\/a>"],[0,1,"<a href=\"Http\/Controllers\/Auth\/AuthController.php.html#64\">AuthController::create<\/a>"],[0,1,"<a href=\"Http\/Controllers\/Auth\/PasswordController.php.html#28\">PasswordController::__construct<\/a>"],[100,3,"<a href=\"Http\/Controllers\/DashboardController.php.html#28\">DashboardController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#49\">DashboardController::create<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#60\">DashboardController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#71\">DashboardController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#82\">DashboardController::edit<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#94\">DashboardController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#105\">DashboardController::destroy<\/a>"],[100,1,"<a href=\"Http\/Controllers\/DashboardController.php.html#110\">DashboardController::gen<\/a>"],[100,1,"<a href=\"Http\/Controllers\/EmailController.php.html#12\">EmailController::send<\/a>"],[100,1,"<a href=\"Http\/Controllers\/EmailController.php.html#17\">EmailController::anonymous function<\/a>"],[0,4,"<a href=\"Http\/Middleware\/Authenticate.php.html#18\">Authenticate::handle<\/a>"],[15.384615384615,6,"<a href=\"Http\/Middleware\/OauthMiddleware.php.html#22\">OauthMiddleware::handle<\/a>"],[0,2,"<a href=\"Http\/Middleware\/RedirectIfAuthenticated.php.html#18\">RedirectIfAuthenticated::handle<\/a>"],[0,1,"<a href=\"Http\/Requests\/CreateOrderRequest.php.html#14\">CreateOrderRequest::authorize<\/a>"],[0,2,"<a href=\"Http\/Requests\/CreateOrderRequest.php.html#24\">CreateOrderRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/CreateUserRequest.php.html#14\">CreateUserRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/CreateUserRequest.php.html#24\">CreateUserRequest::rules<\/a>"],[90.909090909091,5,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#39\">ApiController::__construct<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#73\">ApiController::getModel<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#81\">ApiController::setModel<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#85\">ApiController::index<\/a>"],[100,2,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#109\">ApiController::show<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#120\">ApiController::store<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#128\">ApiController::anonymous function<\/a>"],[75,2,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#136\">ApiController::setModelArray<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#146\">ApiController::getModelArrayKey<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#153\">ApiController::getModelAttributes<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#160\">ApiController::getUpdated<\/a>"],[100,2,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#166\">ApiController::runValidation<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#180\">ApiController::boot<\/a>"],[100,2,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#195\">ApiController::getModelCollection<\/a>"],[100,2,"<a href=\"Intersect\/Api\/Controller\/ApiController.php.html#207\">ApiController::getInstance<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Exception\/ApiException.php.html#16\">ApiException::__construct<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Oauth\/Pdo.php.html#16\">Pdo::__construct<\/a>"],[66.666666666667,2,"<a href=\"Intersect\/Api\/Oauth\/Pdo.php.html#24\">Pdo::checkUserCredentials<\/a>"],[66.666666666667,2,"<a href=\"Intersect\/Api\/Oauth\/Pdo.php.html#36\">Pdo::getUser<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Oauth\/Server.php.html#21\">Server::init<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Oauth\/Server.php.html#24\">Server::anonymous function<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Oauth\/Server.php.html#40\">Server::getServerInstance<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Request\/QueryBuilder.php.html#21\">QueryBuilder::__construct<\/a>"],[0,2,"<a href=\"Intersect\/Api\/Request\/QueryBuilder.php.html#26\">QueryBuilder::applyFilters<\/a>"],[0,2,"<a href=\"Intersect\/Api\/Request\/QueryBuilder.php.html#35\">QueryBuilder::applyParameters<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Request\/QueryBuilder.php.html#47\">QueryBuilder::get<\/a>"],[0,5,"<a href=\"Intersect\/Api\/Response\/Json.php.html#16\">Json::response<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Support\/KeyArray.php.html#18\">KeyArray::getArray<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Support\/KeyArray.php.html#24\">KeyArray::anonymous function<\/a>"],[0,2,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#30\">ModelArrayValidator::getKey<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#39\">ModelArrayValidator::rules<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#44\">ModelArrayValidator::messages<\/a>"],[0,6,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#49\">ModelArrayValidator::validate<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#94\">ModelArrayValidator::getErrors<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/ModelArrayValidator.php.html#99\">ModelArrayValidator::getMessageBag<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/OrderArray.php.html#25\">OrderArray::messages<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/OrderArray.php.html#35\">OrderArray::rules<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/OrderDetailArray.php.html#18\">OrderDetailArray::rules<\/a>"],[100,1,"<a href=\"Intersect\/Api\/Validation\/ModelValidators\/UserArray.php.html#19\">UserArray::rules<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Validation\/RequestValidator.php.html#27\">RequestValidator::__construct<\/a>"],[0,3,"<a href=\"Intersect\/Api\/Validation\/RequestValidator.php.html#32\">RequestValidator::checkRequired<\/a>"],[100,1,"<a href=\"Order.php.html#23\">Order::lineItems<\/a>"],[100,1,"<a href=\"Order.php.html#28\">Order::q<\/a>"],[100,1,"<a href=\"Order.php.html#33\">Order::todaysOrders<\/a>"],[100,1,"<a href=\"Order.php.html#38\">Order::salesByDate<\/a>"],[100,1,"<a href=\"Order.php.html#43\">Order::scopeTopCustomers<\/a>"],[100,1,"<a href=\"Promotion.php.html#27\">Promotion::setDiscountedPrice<\/a>"],[100,1,"<a href=\"Promotion.php.html#142\">Promotion::anonymous function<\/a>"],[100,1,"<a href=\"Promotion.php.html#37\">Promotion::getCustomerSpecificPromotions<\/a>"],[100,1,"<a href=\"Promotion.php.html#45\">Promotion::getSelectedCustomers<\/a>"],[100,1,"<a href=\"Promotion.php.html#58\">Promotion::getExcludedCustomers<\/a>"],[100,1,"<a href=\"Promotion.php.html#66\">Promotion::getRetailerPromotions<\/a>"],[100,1,"<a href=\"Promotion.php.html#73\">Promotion::getWholesalerPromotions<\/a>"],[100,11,"<a href=\"Promotion.php.html#79\">Promotion::getCustomers<\/a>"],[100,1,"<a href=\"Promotion.php.html#114\">Promotion::excludedCustomers<\/a>"],[100,1,"<a href=\"Promotion.php.html#119\">Promotion::Products<\/a>"],[100,1,"<a href=\"Promotion.php.html#124\">Promotion::getId<\/a>"],[100,1,"<a href=\"Promotion.php.html#129\">Promotion::getActivePromotions<\/a>"],[100,1,"<a href=\"Promotion.php.html#134\">Promotion::getDiscount<\/a>"],[100,1,"<a href=\"Promotion.php.html#139\">Promotion::flatten_array<\/a>"],[100,2,"<a href=\"Promotion.php.html#148\">Promotion::getDiscountedPrice<\/a>"],[0,1,"<a href=\"Promotions.php.html#15\">Promotions::getCustomerSpecificPromotions<\/a>"],[0,1,"<a href=\"Promotions.php.html#20\">Promotions::getExcludedCustomers<\/a>"],[0,1,"<a href=\"Promotions.php.html#25\">Promotions::getRetailerPromotions<\/a>"],[0,1,"<a href=\"Promotions.php.html#30\">Promotions::getWholesalerPromotions<\/a>"],[100,1,"<a href=\"Providers\/AppServiceProvider.php.html#14\">AppServiceProvider::boot<\/a>"],[100,1,"<a href=\"Providers\/AppServiceProvider.php.html#24\">AppServiceProvider::register<\/a>"],[100,1,"<a href=\"Providers\/AuthServiceProvider.php.html#25\">AuthServiceProvider::boot<\/a>"],[100,1,"<a href=\"Providers\/EventServiceProvider.php.html#27\">EventServiceProvider::boot<\/a>"],[100,1,"<a href=\"Providers\/RouteServiceProvider.php.html#25\">RouteServiceProvider::boot<\/a>"],[100,1,"<a href=\"Providers\/RouteServiceProvider.php.html#38\">RouteServiceProvider::map<\/a>"],[100,1,"<a href=\"Providers\/RouteServiceProvider.php.html#53\">RouteServiceProvider::mapWebRoutes<\/a>"],[100,1,"<a href=\"Providers\/RouteServiceProvider.php.html#57\">RouteServiceProvider::anonymous function<\/a>"],[0,1,"<a href=\"Repositories\/SalesRepRepository.php.html#19\">SalesRepRepository::all<\/a>"],[0,1,"<a href=\"Repositories\/SalesRepRepository.php.html#24\">SalesRepRepository::show<\/a>"],[0,1,"<a href=\"Sales.php.html#17\">Sales::getSalesByCategory<\/a>"],[0,1,"<a href=\"Sales.php.html#36\">Sales::topSalesByCategory<\/a>"],[100,1,"<a href=\"SalesRep.php.html#11\">SalesRep::all<\/a>"],[100,1,"<a href=\"SalesRep.php.html#16\">SalesRep::show<\/a>"],[100,1,"<a href=\"SalesRep.php.html#21\">SalesRep::orders<\/a>"],[100,1,"<a href=\"UserType.php.html#9\">UserType::user<\/a>"],[100,1,"<a href=\"vwCustomer.php.html#11\">vwCustomer::orders<\/a>"],[100,1,"<a href=\"vwCustomer.php.html#16\">vwCustomer::recentOrders<\/a>"],[100,1,"<a href=\"vwOrder.php.html#25\">vwOrder::getDateAttribute<\/a>"],[100,1,"<a href=\"vwOrder.php.html#31\">vwOrder::lineItems<\/a>"],[100,1,"<a href=\"vwOrder.php.html#36\">vwOrder::OrdersByStatus<\/a>"],[100,1,"<a href=\"vwOrder.php.html#44\">vwOrder::scopeSales<\/a>"],[100,1,"<a href=\"vwOrder.php.html#49\">vwOrder::scopeQuantity<\/a>"],[100,1,"<a href=\"vwOrder.php.html#54\">vwOrder::scopeToday<\/a>"],[100,1,"<a href=\"vwOrder.php.html#60\">vwOrder::scopeYesterday<\/a>"],[100,1,"<a href=\"vwOrder.php.html#65\">vwOrder::WeekStartDate<\/a>"],[100,1,"<a href=\"vwOrder.php.html#71\">vwOrder::WeekEndDate<\/a>"],[100,1,"<a href=\"vwOrderDetail.php.html#13\">vwOrderDetail::order<\/a>"],[100,1,"<a href=\"vwUser.php.html#11\">vwUser::scopeReps<\/a>"],[0,1,"<a href=\"Intersect\/Api\/Sync\/Syncable.php.html#10\">Syncable::sync<\/a>"],[0,2,"<a href=\"SyncTrait.php.html#14\">SyncTrait::scopeUnsynced<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

@@ -168,6 +168,7 @@ return [
     */
 
     'auth' => [
+        'oauth'=>\App\Providers\OauthServiceProvider::class
 
     ],
 
