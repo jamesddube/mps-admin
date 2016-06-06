@@ -6,11 +6,11 @@
  * Time: 11:29 AM
  */
 
-namespace Intersect\Api\Validation\ModelValidators;
+namespace App\Intersect\Api\Validation\ModelValidators;
 
 use Illuminate\Http\Request;
-use Intersect\Api\Support\KeyArray;
-use Intersect\Api\Validation\ModelArrayValidator;
+use App\Intersect\Api\Support\KeyArray;
+use App\Intersect\Api\Validation\ModelArrayValidator;
 
 class OrderArray extends ModelArrayValidator
 {

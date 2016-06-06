@@ -6,7 +6,7 @@
  * Time: 4:26 PM
  */
 
-namespace Intersect\Api\Response;
+namespace App\Intersect\Api\Response;
 
 
 use Symfony\Component\HttpFoundation\Response;

@@ -31,9 +31,9 @@ class OauthMiddleware
         $brigedRequest = OauthRequest::createFromRequest($req);
         $brigedResponse = new \OAuth2\HttpFoundationBridge\Response();
 
-        if(!$token = App::make('oauth2')->getAccessTokenData($brigedRequest,$brigedResponse))
+        if(!$token = App::make('oauth')->getAccessTokenData($brigedRequest,$brigedResponse))
         {
-            $response = App::make('oauth2')->getResponse();
+            $response = App::make('oauth')->getResponse();
 
             if($response->isClientError() && $response->getParameter('error'))
             {

@@ -2,35 +2,62 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Database\Eloquent\Collection;
+
+use App\Http\Controllers\ApiController;
+use App\Mps\Support\Helpers;
+use App\Mps\Transformers\OrderTransformer;
+use App\Mps\Validators\OrderValidator;
+use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Intersect\Api\Controller\ApiController;
-use Intersect\Api\Validation\ModelValidators\OrderArray;
-use Intersect\Api\Validation\ModelValidators\OrderDetailArray;
 
 class OrderController extends ApiController
 {
+    /**
+     * Sample constructor.
+     * @param OrderRepository $repository
+     * @param OrderTransformer $transformer
+     * @param OrderValidator $validator
+     */
+    public function __construct(OrderRepository $repository, OrderTransformer $transformer,OrderValidator $validator)
+    {
+        parent::__construct($repository,$transformer,$validator);
+    }
+
     public function store(Request $request)
     {
-      
+        if($this->validator->validate())
+        {
 
-        $odc =new OrderDetailController();
-        $odc->runValidation($request->toArray());
-        $this->runValidation($request->toArray());
-        
-        $ordersArray = $request->input($this->getModelArrayKey());
-        $order_detailsArray = $request->input('order_details');
+            $orders = Helpers::getModelCollection(
+                'App\Order',
+                $request->input('orders')
+            );
+            $details = Helpers::getModelCollection(
+                'App\OrderDetail',
+                $request->input('order_details')
+            );
 
-        $orders = $this->getModelCollection($ordersArray)->toArray();
-        $order_details = $odc->getModelCollection($order_detailsArray)->toArray();
+            DB::transaction(function () use ($orders,$details){
+                foreach ($orders as $order) {
+                    $order->save();
+                }
+                foreach ($details as $detail) {
+                    $detail->save();
+                }
+            });
 
-        DB::transaction(function () use ($orders,$order_details) {
-            DB::table('orders')->insert($orders);
-            DB::table('order_details')->insert($order_details);
-        });
+            return $this->setStatusCode(201)->respond([
+                'message' => 'resource saved',
+                'status_code'=>$this->getStatusCode()
+            ]);
 
-        return response()->json(["message"=>"entity processed"] , 201);
+        }
+        else
+        {
+            $errors = $this->validator->getErrors()->all();
 
+            return $this->respondWithValidationErrors($errors);
+        }
     }
 }

@@ -6,7 +6,7 @@
  * Time: 9:18 PM
  */
 
-namespace Intersect\Api\Request;
+namespace App\Intersect\Api\Request;
 
 use Illuminate\Support\Facades\DB;
 

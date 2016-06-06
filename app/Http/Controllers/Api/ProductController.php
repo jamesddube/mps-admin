@@ -8,9 +8,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use Intersect\Api\Controller\ApiController;
+
+
+use App\Http\Controllers\ApiController;
+use App\Mps\Transformers\ProductTransformer;
+use App\Mps\Validators\ProductValidator;
+use App\Repositories\ProductRepository;
+use Bosnadev\Repositories\Eloquent\Repository;
 
 class ProductController extends ApiController
 {
+    public function __construct(ProductRepository $repository, ProductTransformer $transformer, ProductValidator $collectionValidator)
+    {
+        parent::__construct($repository, $transformer, $collectionValidator);
+    }
 
 }

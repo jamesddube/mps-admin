@@ -6,7 +6,7 @@
  * Time: 2:21 PM
  */
 
-namespace Intersect\Api\Controller;
+namespace App\Intersect\Api\Controller;
 
 
 use App\Http\Controllers\Controller;
@@ -19,9 +19,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Intersect\Api\Request\QueryBuilder;
-use Intersect\Api\Response\Json;
-use Intersect\Api\Validation\ModelArrayValidator;
+use App\Intersect\Api\Request\QueryBuilder;
+use App\Intersect\Api\Response\Json;
+use App\Intersect\Api\Validation\ModelArrayValidator;
 use JavaScript;
 use Symfony\Component\Debug\Exception\ClassNotFoundException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -57,12 +57,12 @@ class ApiController extends Controller
 
         if($this->modelArray == null)
         {
-            $this->setModelArray('\Intersect\Api\Validation\ModelValidators\\'.str_replace("Controller",'',class_basename($this)).'Array');
+            $this->setModelArray('\App\Intersect\Api\Validation\ModelValidators\\'.str_replace("Controller",'',class_basename($this)).'Array');
         }
 
         if($this->requestValidator == null)
         {
-            $this->requestValidator = ('\Intersect\Api\Validation\RequestValidators\\'.str_replace("Controller",'',class_basename($this)).'Request');
+            $this->requestValidator = ('\App\Intersect\Api\Validation\RequestValidators\\'.str_replace("Controller",'',class_basename($this)).'Request');
         }
 
     }

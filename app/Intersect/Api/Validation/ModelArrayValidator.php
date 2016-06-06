@@ -6,7 +6,7 @@
  * Time: 11:50 PM
  */
 
-namespace Intersect\Api\Validation;
+namespace App\Intersect\Api\Validation;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
@@ -15,18 +15,40 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 abstract class ModelArrayValidator
 {
+    /**
+     * @var
+     */
     protected $key;
 
+    /**
+     * @var
+     */
     protected $request;
 
+    /**
+     * @var array
+     */
     protected $required = [];
 
+    /**
+     * @var
+     */
     protected $errors;
-    
+
+    /**
+     * @var
+     */
     protected $messages;
 
+    /**
+     * @var
+     */
     protected $messageBag;
 
+    /**
+     * @return String $key
+     * @throws \Exception
+     */
     public function getKey()
     {
         if ($this->key == null)
@@ -36,16 +58,26 @@ abstract class ModelArrayValidator
         return $this->key;
     }
 
+    /**
+     * @return array
+     */
     protected function rules()
     {
         return array();
     }
 
+    /**
+     * @return array
+     */
     protected function messages()
     {
         return array();
     }
 
+    /**
+     * @param array $request
+     * @return bool
+     */
     public function validate(array $request)
     {
         $this->request = $request;
@@ -91,11 +123,17 @@ abstract class ModelArrayValidator
 
     }
 
+    /**
+     * @return mixed
+     */
     public function getErrors()
     {
         return $this->errors;
     }
 
+    /**
+     * @return mixed
+     */
     public function getMessageBag()
     {
         return $this->messageBag;

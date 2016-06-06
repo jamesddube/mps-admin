@@ -6,23 +6,20 @@
  * Time: 4:28 PM
  */
 
-namespace Intersect\Api\Support;
+namespace App\Intersect\Api\Support;
 
 
 use Illuminate\Support\Collection;
 
 class KeyArray
 {
-    private static $key;
 
     public static function getArray($array , $key)
     {
-        self::$key = $key;
-
         $collection = Collection::make($array);
 
-        $id = $collection->map(function($od){
-            return $od[self::$key];
+        $id = $collection->map(function($od)use ($key){
+            return $od[$key];
         });
 
         return $id->flatten()->toArray();

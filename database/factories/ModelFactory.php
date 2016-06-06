@@ -24,7 +24,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
     $c = \App\Customer::all('id');
     $id = $c[ rand(0, (count($c) - 1)) ]->id;
     return [
-        "id"              => $faker->numerify('OD-########'),
+        "id"        => $faker->numerify('OD-########'),
         "customer_id"     => $id,
         "user_id"         => 2,
         "order_date"      =>date('Y-m-d'),
@@ -48,7 +48,7 @@ $factory->define(App\OrderDetail::class, function (Faker\Generator $faker) {
 $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     return
         [
-            "id"                 => ucfirst($faker->randomLetter) . $faker->numerify('-###'),
+            "id"                 => ucfirst($faker->randomLetter).ucfirst($faker->randomLetter) . $faker->numerify('-######'),
             "name"               => $faker->company,
             "vat_number"         => $faker->randomNumber(5),
             "address"            => $faker->address,

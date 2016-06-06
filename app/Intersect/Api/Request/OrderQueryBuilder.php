@@ -6,7 +6,7 @@
  * Time: 9:21 PM
  */
 
-namespace Intersect\Api\Request;
+namespace App\Intersect\Api\Request;
 
 
 class OrderQueryBuilder extends QueryBuilder

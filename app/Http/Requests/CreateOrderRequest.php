@@ -21,7 +21,7 @@ class CreateOrderRequest extends Request
      *
      * @return array
      */
-    public function rules()
+    /*public function rules()
     {
         $rules = [
             'hobbies' => 'required',
@@ -31,5 +31,14 @@ class CreateOrderRequest extends Request
             $rules['items.'.$value] = 'required|integer';
         }
         return $rules;
+    }*/
+    public function rules()
+    {
+           return [
+               'orders.*.id' => 'required|numeric'
+           ];
+
+
+
     }
 }

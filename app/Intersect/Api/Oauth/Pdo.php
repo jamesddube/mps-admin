@@ -6,7 +6,7 @@
  * Time: 7:26 PM
  */
 
-namespace Intersect\Api\Oauth;
+namespace App\Intersect\Api\Oauth;
 
 
 use OAuth2\Storage\Pdo as Oauth2Pdo;

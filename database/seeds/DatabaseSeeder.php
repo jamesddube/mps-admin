@@ -32,15 +32,22 @@ class DatabaseSeeder extends Seeder
 
 //        dd(factory(App\OrderDetail::class, 2)->make());
 
-        factory(App\Customer::class, 3)->create();
-        factory(App\User::class, 5)->create();
-        factory(App\Product::class, 10)->create();
-        factory(App\Order::class, 30)->make()
+        factory(App\Customer::class, 1000)->create();
+        factory(App\User::class, 10)->create();
+        factory(App\Product::class, 600)->create();
+        factory(App\Order::class, 10)->make()
             ->each(function($o){
-                $id = $o->id;
+                
                 $o->save();
-                $o = \App\Order::find($id);
-                $o->lineItems()->save(factory(\App\OrderDetail::class)->make());
+               // dd($o);
+                $o->lineItems()->saveMany([
+                    factory(\App\OrderDetail::class)->make(),
+                    factory(\App\OrderDetail::class)->make(),
+                    factory(\App\OrderDetail::class)->make(),
+                    factory(\App\OrderDetail::class)->make(),
+                    factory(\App\OrderDetail::class)->make(),
+                    factory(\App\OrderDetail::class)->make(),
+                ]);
             });
 
         //factory(App\Product::class, 5000)->create();

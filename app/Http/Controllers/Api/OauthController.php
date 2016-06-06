@@ -20,7 +20,7 @@ class OauthController extends Controller
         $bridgedRequest = Request::createFromRequest($request->instance());
         $bridgedResponse = new Response();
 
-        $bridgedResponse = App::make('oauth2')->handleTokenRequest($bridgedRequest , $bridgedResponse);
+        $bridgedResponse = App::make('oauth')->handleTokenRequest($bridgedRequest , $bridgedResponse);
 
         return $bridgedResponse;
     }

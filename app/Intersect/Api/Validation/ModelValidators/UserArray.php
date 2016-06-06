@@ -6,11 +6,11 @@
  * Time: 9:55 AM
  */
 
-namespace Intersect\Api\Validation\ModelValidators;
+namespace App\Intersect\Api\Validation\ModelValidators;
 
 
-use Intersect\Api\Support\KeyArray;
-use Intersect\Api\Validation\ModelArrayValidator;
+use App\Intersect\Api\Support\KeyArray;
+use App\Intersect\Api\Validation\ModelArrayValidator;
 
 class UserArray extends ModelArrayValidator
 {

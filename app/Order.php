@@ -13,6 +13,7 @@ class Order extends Model
     protected $fillable =
         [
             'id',
+            'order_id',
             'user_id',
             'customer_id',
             'order_status_id',
@@ -22,7 +23,12 @@ class Order extends Model
     //
     public function lineItems()
     {
-        return $this->hasMany('App\OrderDetail');
+        return $this->hasMany('App\OrderDetail','order_id','id');
+    }
+
+    public static function getByOrderId($id)
+    {
+        return self::Where(['order_id' => $id])->first();
     }
     
     public function q()

@@ -6,7 +6,7 @@
  * Time: 11:38 PM
  */
 
-namespace Intersect\Api\Controller;
+namespace App\Intersect\Api\Controller;
 
 
 use Illuminate\Database\Eloquent\Model;

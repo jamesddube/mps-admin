@@ -23,6 +23,8 @@ class CreateUserRequest extends Request
      */
     public function rules()
     {
+       
+        dd($this->all());
         return [
             'name'=>'required',
             'surname'=>'required',
@@ -32,4 +34,6 @@ class CreateUserRequest extends Request
             'avatar'=>'required|image'
         ];
     }
+
+
 }

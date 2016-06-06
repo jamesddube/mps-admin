@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/mps/public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,7 +160,8 @@ return [
          * MPS Specific Service Providers
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
-        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider'
+        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
+        App\Providers\OauthServiceProvider::class
     ],
 
     /*

@@ -12,7 +12,7 @@
         "bshaffer/oauth2-server-httpfoundation-bridge": "^1.1",
         "laracasts/utilities": "^2.1",
         "lucadegasperi/oauth2-server-laravel": "5.1.*",
-	"laracasts/presenter": "0.1.*"
+        "bosnadev/repositories": " 0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -24,15 +24,16 @@
     "autoload": {
         "classmap": [
             "database"
+
         ],
         "psr-4": {
-            "App\\": "app/",
-            "Intersect\\": "app/Intersect"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
+
         ]
     },
     "scripts": {

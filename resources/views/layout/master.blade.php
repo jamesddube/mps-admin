@@ -14,7 +14,7 @@
 
     @section('header')
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
-    <link href="{{ url('http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700')}}" rel="stylesheet">
+    <link href="{{ url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700')}}" rel="stylesheet">
     <link href="{{ url('assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css') }}" rel="stylesheet" />
     <link href="{{ url('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ url('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
