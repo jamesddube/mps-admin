@@ -64,6 +64,8 @@ class Sample extends ApiController
         {
             $errors = $this->validator->getErrors()->all();
 
+             Log::debug($errors);
+
             return $this->respondWithValidationErrors($errors);
         }
     }

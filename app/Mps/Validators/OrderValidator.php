@@ -21,7 +21,7 @@ class OrderValidator extends CollectionValidator
             case 'POST':
             {
                 return [
-                    'orders'  => "required|array",
+                    'orders'  => "required",
                     'orders.*.id' => "required|unique:orders,id",
                     'orders.*.sync_id' => 'required',
                     'orders.*.order_date' => 'required',
