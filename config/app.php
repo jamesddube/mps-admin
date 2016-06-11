@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/mps/public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Harare',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
@@ -159,11 +159,9 @@ return [
         /*
          * MPS Specific Service Providers
          */
-
         Dingo\Api\Provider\LaravelServiceProvider::class,
         'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
         App\Providers\OauthServiceProvider::class
-
     ],
 
     /*

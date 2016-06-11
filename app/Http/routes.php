@@ -1,34 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-$api = app('Dingo\Api\Routing\Router');
-
-use Illuminate\Support\Facades\App;
-
-
         
-     /*   App::singleton('oauth2', function() {
+        $api = app('Dingo\Api\Routing\Router');
 
-            $storage = new \Intersect\Api\Oauth\Pdo(App::make('db')->getPdo());
-            //$storage = new \OAuth2\Storage\Pdo(App::make('db')->getPdo());
-            $server = new OAuth2\Server($storage);
-
-            $server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
-            $server->addGrantType(new OAuth2\GrantType\UserCredentials($storage));
-
-            return $server;
-        });*/
+        ;Route::resource('sample','Sample');
         
-
         
         
         /*
@@ -61,47 +37,55 @@ use Illuminate\Support\Facades\App;
         Route::post('auth/register', 'Auth\AuthController@postRegister');
         
         Route::get('sales',function(){
+            
         
             return App\vwOrder::sales()->get();
         });
         
         Route::get('email/{email}','EmailController@send');
-        Route::post('test',function($id){
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-        $api = app('Dingo\Api\Routing\Router');
+        
         
         $api->version('v1', function ($api)
         {
+
+            $api->get('testi',function(\Illuminate\Http\Request $request){
+
+                return response()->json($request->all());
+            });
             $api->post('test',function(\Illuminate\Http\Request $request){
 
-$api->version('v1', function ($api)
-{
-    //Test Api
-    $api->get('check',function(){ return ["message" => "success"];});
-
-    //Route for API Tokens
-    $api->post('oauth/token', 'App\Http\Controllers\Api\OauthController@getToken');
-                $api->get('oauth/test',function(){
-                   return ['message'=>'authenticated'];
-                });
+                return ['name'=>$request->toArray()];
+            });
+            $api->get('test','App\Http\Controllers\Api\OrderController@getUpdated');
+            //Test Api
+            $api->get('check',function(){ return ["message" => "success"];});
+        
+            //Route for API Tokens
+            $api->post('oauth/token', 'App\Http\Controllers\Api\OauthController@getToken');
+        
+            $api->group(['middleware' => 'oauth'], function($api){
+                $api->resource('sample','App\Http\Controllers\Sample');
 
                 $api->resource('/orders' , 'App\Http\Controllers\Api\OrderController');
                 $api->resource('/users' , 'App\Http\Controllers\Api\UserController');
                 $api->resource('/products' , 'App\Http\Controllers\Api\ProductController');
                 $api->resource('/customers' , 'App\Http\Controllers\Api\CustomerController');
 
-    $api->group(['middleware' => 'oauth'], function($api){
+                $api->post('sync','App\Http\Controllers\Api\SyncController@hardSync');
 
-        $api->resource('/orders' , 'App\Http\Controllers\Api\OrderController');
-        $api->resource('/users' , 'App\Http\Controllers\Api\UserController');
-        $api->resource('/products' , 'App\Http\Controllers\Api\ProductController');
-        $api->get('/samples','App\Http\Controllers\Api\SampleController@index');
-    });
+                $api->get('sync/orders' , 'App\Http\Controllers\Api\OrderController@sync');
+                $api->get('sync/users' , 'App\Http\Controllers\Api\UserController@getUpdated');
+                $api->get('sync/products' , 'App\Http\Controllers\Api\ProductController@getUpdated');
+                $api->get('sync/customers' , 'App\Http\Controllers\Api\CustomerController@getUpdated');
+            });
 
+        
+        
+        });
 
-});
+        Route::group(['prefix'=>'analytics'],function(){
+
+            Route::get('/','AnalyticsController@Dashboard');
+        });

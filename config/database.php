@@ -78,6 +78,25 @@ return [
             'schema' => 'public',
         ],
 
+        'aximos' => [
+            'driver'   => 'sqlsrv',
+            'host'     => env('AXIMOS_URL', '10.42.0.3'),
+            'database' => env('AXIMOS_DB', 'aximos'),
+            'username' => env('AXIMOS_USER', 'sa'),
+            'password' => env('AXIMOS_PASSWORD', 'sead2301'),
+            'charset'  => 'utf8',
+            'prefix'   => '',
+        ],
+        'aximos_local' => [
+            'driver'   => 'sqlsrv',
+            'host'     => env('AXIMOS_URL', '10.42.0.3'),
+            'database' => env('AXIMOS_DB', 'aximos'),
+            'username' => env('AXIMOS_USER', 'sa'),
+            'password' => env('AXIMOS_PASSWORD', 'password'),
+            'charset'  => 'utf8',
+            'prefix'   => '',
+        ],
+
     ],
 
     /*

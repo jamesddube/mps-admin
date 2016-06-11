@@ -6,11 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class vwUser extends Model
 {
-    //
-    
-    public function scopeReps($query)
+    public static function reps()
     {
-        return $query->where('user_type','Sales Representative');
+        return self::where('user_type','Sales Representative');
     }
-
 }
