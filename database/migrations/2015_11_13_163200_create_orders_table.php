@@ -17,14 +17,10 @@ class CreateOrdersTable extends Migration
             $table->string('customer_id');
             $table->integer('user_id')->unsigned();
             $table->integer('order_status_id')->unsigned();;
-            $table->integer('sync_id')->unsigned();
+            $table->boolean('sync_status');
             $table->date('order_date');
             $table->timestamps();
             $table->primary('id');
-            $table->foreign('sync_id')
-                ->references('id')->on('sync_status')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade')

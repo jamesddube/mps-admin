@@ -21,15 +21,14 @@ class OrderValidator extends CollectionValidator
             case 'POST':
             {
                 return [
-                    'orders'  => "required",
+                    'orders'  => "required|array",
                     'orders.*.id' => "required|unique:orders,id",
-                    'orders.*.sync_id' => 'required',
+                    'orders.*.sync_status' => 'required|boolean',
                     'orders.*.order_date' => 'required',
                     'orders.*.customer_id' => 'required|exists:customers,id',
                     'orders.*.order_status_id' => 'required',
                     'orders.*.user_id' => 'required|exists:users,id',
-                    'orders.*.order_details'=>'required',
-                    'orders.*.order_details.*.id'=>"required|unique:order_details,id",
+                    'orders.*.order_details'=>'required|array',
                     'orders.*.order_details.*.quantity'  =>  'required',
                     'orders.*.order_details.*.product_id'=>  'required|exists:products,id'
                 ];

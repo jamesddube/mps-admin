@@ -32,10 +32,10 @@ class DatabaseSeeder extends Seeder
 
 //        dd(factory(App\OrderDetail::class, 2)->make());
 
-        factory(App\Customer::class, 1000)->create();
-        factory(App\User::class, 10)->create();
+        factory(App\Customer::class, 10000)->create();
+        factory(App\User::class, 2)->create();
         factory(App\Product::class, 600)->create();
-        factory(App\Order::class, 10)->make()
+        factory(App\Order::class, 1)->make()
             ->each(function($o){
                 
                 $o->save();

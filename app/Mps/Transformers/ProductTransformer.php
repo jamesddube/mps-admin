@@ -11,15 +11,10 @@ namespace App\Mps\Transformers;
 
 class ProductTransformer extends Transformer
 {
-    public function transform($product)
-    {
-
-        return
-            [
-                'product_id' => $product['id'],
-                'description' => $product['description'],
-                'price' => $product['price']
-            ];
-
-    }
+    protected $transformKeys = [
+        'id',
+        'description',
+        'price',
+        'image'
+    ];
 }

@@ -25,22 +25,7 @@ class CustomerTransformer extends Transformer
     ];
     
     protected $key = 'customers';
-
-    public function transform($model)
-    {
-        return  [
-            'customer_id' => $model['id'],
-            'name' => $model['name'],
-            'vat_number' => $model['vat_number'],
-            'address' => $model['address'],
-            'telephone' => $model['telephone'],
-            'fax' => $model['fax'],
-            'email' => $model['email'],
-            'city' => $model['city'],
-
-        ];
-
-    }
+    
 
 
 }
