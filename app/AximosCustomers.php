@@ -56,6 +56,6 @@ class AximosCustomers extends Model
             return false;
         });
 
-        return ($elligiblePromotions);
+        return $elligiblePromotions;
     }
 }

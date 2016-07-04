@@ -29,7 +29,7 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         "user_id"         => 2,
         "order_date"      =>date('Y-m-d'),
         "order_status_id" => $faker->randomElement($array = [1, 2, 3]),
-        "sync_id"         => $faker->randomElement($array = [1, 2, 3]),
+        "sync_status"         => $faker->randomElement($array = [1, 2, 3]),
     ];
 });
 
@@ -66,7 +66,7 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Product::class, function (Faker\Generator $faker) {
-    $od = $faker->numerify('PDT-########');
+    $od = $faker->unique()->numerify('####');
     return
         [
             "id"          => $od,
@@ -75,4 +75,16 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
             "price"       => rand(5, 20),
             "image"       => $faker->imageUrl(150, 150),
         ];
+});
+$factory->define(App\Stock::class, function (Faker\Generator $faker) {
+    $c = \App\Product::all('id');
+    $id = $c[ rand(0, (count($c) - 1)) ]->id;
+    return [
+        "id"        => $faker->numerify('OD-########'),
+        "customer_id"     => $id,
+        "user_id"         => 2,
+        "order_date"      =>date('Y-m-d'),
+        "order_status_id" => $faker->randomElement($array = [1, 2, 3]),
+        "sync_status"         => $faker->randomElement($array = [1, 2, 3]),
+    ];
 });

@@ -20,7 +20,9 @@ class CustomerTransformer extends Transformer
         'fax',
         'email',
         'city',
-        
+        'customer_type',
+        'customer_status'
+
 
     ];
     

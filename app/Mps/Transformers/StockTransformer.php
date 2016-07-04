@@ -11,5 +11,10 @@ namespace App\Mps\Transformers;
 
 class StockTransformer extends Transformer
 {
-
+    protected $transformKeys = [
+    	'id',
+        'warehouse_id',
+        'product_id',
+        'quantity',
+    ];
 }

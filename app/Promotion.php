@@ -13,6 +13,7 @@ class Promotion extends Model
     protected $table = 'dbo.tblPromotions';
     protected $primaryKey = 'PromotionID';
 
+    protected $appends = ['customers'];
 
     protected $visible = [
         'Title',
@@ -21,7 +22,8 @@ class Promotion extends Model
         'EndDate',
         'DiscountRate',
         'DiscountedPrice',
-        'Products'
+        'Products',
+        'customers'
     ];
 
     public function setDiscountedPrice()
@@ -152,6 +154,11 @@ class Promotion extends Model
         $discountAmount = (($this->DiscountedRate/100) * $price);
 
         return  $price - $discountAmount;
+    }
+
+    public function getCustomersAttribute()
+    {
+        return $this->getCustomers();
     }
 
 }

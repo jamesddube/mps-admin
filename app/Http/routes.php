@@ -1,9 +1,25 @@
 <?php
 
-        
-        $api = app('Dingo\Api\Routing\Router');
+
+use App\Promotion;
+
+$api = app('Dingo\Api\Routing\Router');
 
         ;Route::resource('sample','Sample');
+        Route::get('promo/{id}',function($id){
+           $promo = Promotion::find($id);
+          
+            return $promo->load('Products');
+        });
+Route::get('present',function(){
+    /** @var \App\vwOrder  $d */
+    $d = \App\vwOrder::first();
+    //return $d->present()->see;
+    //$o = new App\Mps\Presenters\Order();
+    return $d->present()->see;
+});
+
+
         
         
         
@@ -17,32 +33,33 @@
         |
         |
         */
-        
-        // Resource routes...
-        Route::get('/','DashboardController@index');
-        Route::resource('orders' , 'OrderController');
-        Route::resource('products' , 'ProductController');
-        Route::resource('customers' , 'CustomerController');
-        Route::resource('users' , 'UserController');
-        Route::get('salesreps' , 'UserController@salesReps');
-        Route::get('salesreps/{id}' , 'UserController@salesRepsShow');
-        
+
         // Authentication routes...
-        Route::get('auth/login', 'Auth\AuthController@getLogin');
-        Route::post('auth/login', 'Auth\AuthController@postLogin');
-        Route::get('auth/logout', 'Auth\AuthController@getLogout');
-        
-        // Registration routes...
-        Route::get('auth/register', 'Auth\AuthController@getRegister');
-        Route::post('auth/register', 'Auth\AuthController@postRegister');
-        
-        Route::get('sales',function(){
-            
-        
-            return App\vwOrder::sales()->get();
+        Route::auth();
+
+        Route::group(['middleware' => 'auth'], function() {
+
+            // Resource routes...
+            Route::get('/', 'DashboardController@index');
+            Route::resource('orders', 'OrderController');
+            Route::resource('products', 'ProductController');
+            Route::resource('customers', 'CustomerController');
+            Route::resource('users', 'UserController');
+            Route::get('salesreps', 'UserController@salesReps');
+            Route::get('salesreps/{id}', 'UserController@salesRepsShow');
+
+
+            Route::get('sales', function () {
+
+
+                return App\vwOrder::sales()->get();
+            });
+
+            Route::get('email/{email}', 'EmailController@send');
+            Route::get('email', function () {
+                return view('emails.send');
+            });
         });
-        
-        Route::get('email/{email}','EmailController@send');
 
 
         
@@ -73,7 +90,7 @@
                 $api->resource('/products' , 'App\Http\Controllers\Api\ProductController');
                 $api->resource('/customers' , 'App\Http\Controllers\Api\CustomerController');
 
-                $api->post('sync','App\Http\Controllers\Api\SyncController@hardSync');
+                $api->any('sync','App\Http\Controllers\Api\SyncController@hardSync');
 
                 $api->get('sync/orders' , 'App\Http\Controllers\Api\OrderController@sync');
                 $api->get('sync/users' , 'App\Http\Controllers\Api\UserController@getUpdated');

@@ -30,7 +30,8 @@
                         <th>Customer</th>
                         <th>Sales Rep</th>
                         <th>Status</th>
-                        <th>Synced</th>
+                        <th>Route</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,10 +41,17 @@
                         <td>{{ $order->customer }}</td>
                         <td>{{ $order->sales_rep }}</td>
                         <td><span class="label label-success">{{ $order->order_status }}</span></td>
+                        <td>Mutare</td>
                         <td><a href="{{ url('orders/'.$order->id) }}" class="btn btn-sm btn-inverse">
                                 <i class="fa fa-search pull-left"></i>
                                 View<br />
-                            </a></td>
+                            </a>
+                            <a href="{{ url('orders/'.$order->id) }}" class="btn btn-sm btn-success">
+                                <i class="fa fa-cog pull-left"></i>
+                                Process<br />
+                            </a>
+
+                        </td>
                     </tr>
                         @endforeach
                     </tbody>

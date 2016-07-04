@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: rick
- * Date: 6/6/16
- * Time: 9:22 PM
+ * Date: 6/16/16
+ * Time: 11:30 AM
  */
 
 namespace App\Repositories;
@@ -11,7 +11,7 @@ namespace App\Repositories;
 
 use Bosnadev\Repositories\Eloquent\Repository;
 
-class ProductRepository extends Repository
+class StockRepository extends Repository
 {
 
     /**
@@ -21,6 +21,6 @@ class ProductRepository extends Repository
      */
     public function model()
     {
-        return 'App\Product';
+        return 'App\Stock';
     }
 }

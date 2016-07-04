@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('order_status_id')->unsigned();;
             $table->boolean('sync_status');
-            $table->date('order_date');
+            $table->timestamp('order_date');
             $table->timestamps();
             $table->primary('id');
             $table->foreign('user_id')

@@ -136,7 +136,7 @@
                         <li><a href="javascript:;">Calendar</a></li>
                         <li><a href="javascript:;">Setting</a></li>
                         <li class="divider"></li>
-                        <li><a href="javascript:;">Log Out</a></li>
+                        <li><a href="{{ url('logout') }}">Log Out</a></li>
                     </ul>
                 </li>
             </ul>

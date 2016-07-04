@@ -2,19 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: rick
- * Date: 6/2/16
- * Time: 10:32 PM
+ * Date: 6/16/16
+ * Time: 4:10 PM
  */
 
 namespace App\Mps\Transformers;
 
 
-class OrderTransformer extends Transformer
+use App\Mps\Transformers\Transformer;
+
+class RouteTransformer extends Transformer
 {
     protected $transformKeys = [
         'id',
-        'customer_id',
-        'updated_at'
+        'warehouse_id',
     ];
-
 }

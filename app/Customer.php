@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $appends = ['customer_type','customer_status'];
     //
     protected $fillable =
         [
@@ -34,6 +35,28 @@ class Customer extends Model
         {
             return $this->orders()->orderBy('order_date')->limit(5);
         }
+
+
+    public function getCustomerTypeAttribute()
+    {
+        return $this->attributes['customer_type_id'] < 3 ? 'Retailer' : "Wholesaler" ;
+    }
+
+    public function getCustomerStatusAttribute()
+    {
+        if($this->attributes['customer_status_id'] == 1 )
+        {
+            return 'Active';
+        }
+        elseif ($this->attributes['customer_status_id'] == 2 )
+        {
+            return 'Inactive';
+        }
+        else
+        {
+            return 'Blacklisted';
+        }
+    }
 
 
 }

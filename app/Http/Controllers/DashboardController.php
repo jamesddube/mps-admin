@@ -27,7 +27,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $today = vwOrder::Sales()->Today()->Quantity();
+        $today = vwOrder::Sales()->today()->Quantity();
         $yesterday = vwOrder::Sales()->Yesterday()->Quantity();
         $topProduct = Analytics::getTopProduct();
        /*JavaScript::put([

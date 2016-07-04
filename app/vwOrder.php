@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Mps\Presenters\PresentableTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class vwOrder extends Model
 {
+    use PresentableTrait;
+    protected $presenter = 'App\Mps\Presenters\Order';
     //
     public $incrementing = false;
     protected $table = "vw_orders";
@@ -43,7 +46,7 @@ class vwOrder extends Model
 
     public function scopeSales($query)
     {
-        return $query->where('order_status','processed');
+        return $query->where('order_status','<>','draft');
     }
     
     public function scopeQuantity($query)
@@ -54,7 +57,8 @@ class vwOrder extends Model
     public function scopeToday($query)
     {
         $date = new Carbon();
-        return $query->where('date',$date->today());
+        
+        return $query->whereBetween('date',[$date->today(),$date->tomorrow()]);
     }
 
     public function scopeYesterday($query)

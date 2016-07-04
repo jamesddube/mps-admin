@@ -8,6 +8,11 @@ use App\Mps\Transformers\CustomerTransformer;
 use App\Mps\Transformers\ProductTransformer;
 use App\Mps\Transformers\StockTransformer;
 use App\Product;
+use App\Mps\Transformers\RouteTransformer;
+use App\Mps\Transformers\WarehouseTransformer;
+use App\Route;
+use App\Stock;
+use App\Warehouse;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -24,18 +29,24 @@ class SyncController extends Controller
     private  $customerTransformer;
     private  $productTransformer;
     private  $stockTransformer;
+    private  $warehouseTransformer;
+    private   $routeTransformer;
 
     /**
      * SyncController constructor.
-     * @param $customerTransformer
-     * @param $productTransformer
-     * @param $stockTransformer
+     * @param WarehouseTransformer $warehouseTransformer
+     * @param RouteTransformer $routeTransformer
+     * @param CustomerTransformer $customerTransformer
+     * @param ProductTransformer $productTransformer
+     * @param StockTransformer $stockTransformer
      */
-    public function __construct(CustomerTransformer $customerTransformer,ProductTransformer $productTransformer,StockTransformer $stockTransformer)
+    public function __construct(WarehouseTransformer $warehouseTransformer,RouteTransformer $routeTransformer,CustomerTransformer $customerTransformer,ProductTransformer $productTransformer,StockTransformer $stockTransformer)
     {
         $this->customerTransformer = $customerTransformer;
         $this->productTransformer = $productTransformer;
         $this->stockTransformer = $stockTransformer;
+        $this->warehouseTransformer = $warehouseTransformer;
+        $this->routeTransformer = $routeTransformer;
     }
 
     /**
@@ -50,12 +61,20 @@ class SyncController extends Controller
     {
         $products = Product::all();
         $customers = Customer::all();
+        $stocks = Stock::all();
+        $warehouses = Warehouse::all();
+        $routes = Route::all();
+
+        
 
        
 
         return response()->json([
                 'products' => $this->productTransformer->transformCollection($products),
-                'customers'=> $this->customerTransformer->transformCollection($customers)
+                'customers'=> $this->customerTransformer->transformCollection($customers),
+                'stocks'=> $this->stockTransformer->transformCollection($stocks),
+                'warehouses' => $this->warehouseTransformer->transformCollection($warehouses),
+                'routes' => $this->routeTransformer->transformCollection($routes)
         ]);
 
     }
