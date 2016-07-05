@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Http\Controllers\Api;
 use Closure;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use OAuth2\HttpFoundationBridge\Request as OauthRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -21,9 +22,10 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        //return $next($request);
        if(!$request->has('access_token'))
         {
+             Log::info('request: '.print($request->all()));
             throw new BadRequestHttpException('access token not found');
         }
 

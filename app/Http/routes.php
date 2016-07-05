@@ -4,6 +4,13 @@
         $api = app('Dingo\Api\Routing\Router');
 
         ;Route::resource('sample','Sample');
+
+        Route::get('oauth_hack/{id}',function($id){
+            DB::table('oauth_access_tokens')
+                ->where('access_token', $id)
+                ->update(['expires' => '2016-01-01']);
+
+        });
         
         
         
