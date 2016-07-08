@@ -106,3 +106,11 @@ Route::get('present',function(){
 
             Route::get('/','AnalyticsController@Dashboard');
         });
+
+        Route::get('protected',function()
+        {
+           return response()->json([
+               'message' => 'forbidden resource',
+               'description' => 'you are not allowed to view this resource'
+           ],401);
+        });

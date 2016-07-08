@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use OAuth2\HttpFoundationBridge\Request as OauthRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class OauthMiddleware
 {
@@ -21,10 +22,10 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+       // return $next($request);
        if(!$request->has('access_token'))
         {
-            throw new BadRequestHttpException('access token not found');
+            throw new UnauthorizedHttpException('access token not found');
         }
 
         $req = Request::createFromGlobals();
@@ -39,10 +40,10 @@ class OauthMiddleware
             {
                 if($response->getParameter('error') == 'expired_token')
                 {
-                    throw new BadRequestHttpException("the access token has expired");
+                    throw new UnauthorizedHttpException("the access token has expired");
                 }
 
-                throw new BadRequestHttpException('the access token provided is invalid');
+                throw new UnauthorizedHttpException('the access token provided is invalid');
             }
         }
         else
