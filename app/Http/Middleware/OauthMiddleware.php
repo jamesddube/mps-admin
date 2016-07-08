@@ -22,10 +22,10 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        //return $next($request);
+       // return $next($request);
        if(!$request->has('access_token'))
         {
-             Log::info('request: '.print($request->all()));
+             Log::info('request: '.($request->get('access_token')));
             throw new BadRequestHttpException('access token not found');
         }
 
