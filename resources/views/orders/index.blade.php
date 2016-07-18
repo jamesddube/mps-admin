@@ -46,10 +46,11 @@
                                 <i class="fa fa-search pull-left"></i>
                                 View<br />
                             </a>
-                            <a href="{{ url('orders/'.$order->id) }}" class="btn btn-sm btn-success">
+                            <a href="#modal-alert" class="btn btn-sm btn-success" data-toggle="modal">
                                 <i class="fa fa-cog pull-left"></i>
                                 Process<br />
                             </a>
+                            <a href="#modal-alert" class="btn btn-sm btn-green" data-toggle="modal"><i class="fa fa-cog pull-left"></i>Process</a>
 
                         </td>
                     </tr>
@@ -85,6 +86,29 @@
         </div>
     </div>
 
+    <!-- #modal-alert -->
+    <div class="modal fade" id="modal-alert">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Alert Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger m-b-0">
+                        <h4><i class="fa fa-info-circle"></i> Alert Header</h4>
+                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                    <a href="javascript:;" class="btn btn-sm btn-danger" data-dismiss="modal">Action</a>
+                </div>
+            </div>
+        </div>
+    </div>
+                       
+
 
     @endsection
 
@@ -98,6 +122,8 @@
             <script src="{{ url('assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
             <script src="{{ url('assets/js/table-manage-select.demo.min.js') }}"></script>
             <script src="{{ url('assets/js/apps.min.js') }}"></script>
+            <script src="assets/plugins/gritter/js/jquery.gritter.js"></script>
+            <script src="assets/js/ui-modal-notification.demo.min.js"></script>
             <!-- ================== END PAGE LEVEL JS ================== -->
 
     <script>
