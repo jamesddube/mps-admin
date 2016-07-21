@@ -25,6 +25,12 @@ class Order extends Model
     {
         return $this->hasMany('App\OrderDetail','order_id','id');
     }
+    
+    public function process()
+    {
+        $this->order_status_id = 3;
+        $this->save();
+    }
 
     public static function getByOrderId($id)
     {

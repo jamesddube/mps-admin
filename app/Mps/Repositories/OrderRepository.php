@@ -6,7 +6,7 @@
  * Time: 2:24 PM
  */
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 
 
 use Bosnadev\Repositories\Eloquent\Repository;

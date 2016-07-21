@@ -7,7 +7,7 @@ use App\Http\Controllers\ApiController;
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\OrderTransformer;
 use App\Mps\Validators\OrderValidator;
-use App\Repositories\OrderRepository;
+use App\Mps\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

@@ -160,7 +160,7 @@ return [
          * MPS Specific Service Providers
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
-        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
+        Spatie\BladeJavaScript\BladeJavaScriptServiceProvider::class,
         App\Providers\OauthServiceProvider::class
     ],
 

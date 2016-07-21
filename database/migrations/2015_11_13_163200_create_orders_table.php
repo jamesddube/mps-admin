@@ -14,6 +14,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->string('id');
+            $table->string('presell_sheet_id');
             $table->string('customer_id');
             $table->integer('user_id')->unsigned();
             $table->integer('order_status_id')->unsigned();;
@@ -33,6 +34,10 @@ class CreateOrdersTable extends Migration
                 ->references('id')->on('customers')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreign('presell_sheet_id')
+                ->references('id')->on('presell_sheets')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -43,6 +48,13 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
+        Schema::table('presell_sheets', function ($table) {
+            $table->dropForeign(['presell_sheet_status_id','user_id','route_id']);
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['route_id']);
+        });
+
+        Schema::drop('presell_sheets');
         Schema::drop('orders');
     }
 }

@@ -6,7 +6,7 @@
  * Time: 9:48 AM
  */
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 
 
 interface RepositoryInterface

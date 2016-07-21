@@ -33,6 +33,10 @@ class CreateProductTable extends Migration
      */
     public function down()
     {
+        Schema::table('products', function ($table) {
+            $table->dropForeign(['category_id']);
+        });
+        
         Schema::drop('products');
     }
 }

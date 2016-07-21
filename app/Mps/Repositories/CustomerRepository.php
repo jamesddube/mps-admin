@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;

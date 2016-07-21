@@ -19,6 +19,11 @@ Class Transformer
     {
         $data = [];
 
+        if(count($this->transformKeys) == 0)
+        {
+            return $model;
+        }
+
         foreach ($this->transformKeys as $key)
         {
             $data[$key] = $model[$key];
@@ -27,9 +32,9 @@ Class Transformer
         return $data;
     }
 
-    public function transformCollection($models)
+    public function transformCollection(array $modelsArray)
     {
-        return array_map([$this, 'transform'],$models->toArray());
+        return array_map([$this, 'transform'],$modelsArray);
     }
 
     /**

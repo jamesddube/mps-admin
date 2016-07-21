@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderModel;
+use App\User;
 use App\vwOrder;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -21,7 +22,8 @@ class OrderController extends Controller
 	public function index()
 	{
 		//
-		$orders = vwOrder::all();
+		$orders = vwOrder::paginate(10);
+
 
 		return view('orders.index', compact('orders'));
 	}
@@ -101,5 +103,24 @@ class OrderController extends Controller
 	public function destroy($id)
 	{
 		//
+	}
+	
+	public function process(Request $request)
+	{
+		
+		if($request->has('id'))
+		{
+			/* @var Order $order */
+			$order = Order::find($request->input('id'));
+
+			//todo Validate Order..stocks etc
+
+			$order->process();
+			return response()->json(['message'=>'success']);
+		}
+		return response()->json(['message' =>"error"]);
+
+		
+		
 	}
 }

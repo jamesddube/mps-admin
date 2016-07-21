@@ -6,7 +6,7 @@
  * Time: 1:58 PM
  */
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 
 
 use App\SalesRep;

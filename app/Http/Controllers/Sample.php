@@ -10,11 +10,9 @@ namespace App\Http\Controllers;
 
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\OrderTransformer;
-use App\Mps\Validators\CollectionValidator;
 use App\Mps\Validators\OrderValidator;
 use App\Order;
-use App\OrderDetail;
-use App\Repositories\OrderRepository;
+use App\Mps\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

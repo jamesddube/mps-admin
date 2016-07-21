@@ -54,13 +54,24 @@ class ApiController extends Controller
      */
     public function index()
     {
-        $models = $this->repository->all();
+        $models = $this->repository->paginate(2);
 
         if(! $models)
         {
             throw new NotFoundHttpException('resources not found');
         }
-        return $this->respondCollection($models);
+
+        return $this->respond(array_merge(['status_code'=>$this->getStatusCode()],$models->toArray()));
+
+        return array_merge(['status_code'=>$this->getStatusCode()],$models->toArray());
+
+        //maybe do a array_replace() on data key, so that we keep paginator data
+
+        $e = $models->toArray();
+
+        //dd(['models' => $models ,'data' => $e['data']]);
+
+        return $this->respondCollection($e['data']);
     }
 
     public function show($id)

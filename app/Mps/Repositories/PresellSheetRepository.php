@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: rick
- * Date: 6/16/16
- * Time: 11:30 AM
+ * Date: 7/20/16
+ * Time: 12:27 PM
  */
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 
 
 use Bosnadev\Repositories\Eloquent\Repository;
 
-class StockRepository extends Repository
+class PresellSheetRepository extends Repository
 {
 
     /**
@@ -21,6 +21,6 @@ class StockRepository extends Repository
      */
     public function model()
     {
-        return 'App\Stock';
+        return 'App\PresellSheet';
     }
 }

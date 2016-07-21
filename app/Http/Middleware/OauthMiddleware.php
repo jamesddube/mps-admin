@@ -23,7 +23,7 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-       // return $next($request);
+       return $next($request);
        if(!$request->has('access_token'))
         {
             throw new UnauthorizedHttpException(null,'access token not found');
@@ -50,8 +50,9 @@ class OauthMiddleware
         else
         {
             $request['user_id'] = $token['user_id'];
+            return $next($request);
         }
 
-        return $next($request);
+        
     }
 }

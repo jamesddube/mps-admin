@@ -7,9 +7,9 @@ use App\Intersect\Api\Support\KeyArray;
 use App\Mps\Transformers\CustomerTransformer;
 use App\Mps\Transformers\ProductTransformer;
 use App\Mps\Transformers\StockTransformer;
+use App\Mps\Transformers\WarehouseTransformer;
 use App\Product;
 use App\Mps\Transformers\RouteTransformer;
-use App\Mps\Transformers\WarehouseTransformer;
 use App\Route;
 use App\Stock;
 use App\Warehouse;
@@ -64,18 +64,20 @@ class SyncController extends Controller
         $stocks = Stock::all();
         $warehouses = Warehouse::all();
         $routes = Route::all();
+        //$warehouses->load('stocks.product');
 
         
 
        
 
         return response()->json([
-                'products' => $this->productTransformer->transformCollection($products),
-                'customers'=> $this->customerTransformer->transformCollection($customers),
-                'stocks'=> $this->stockTransformer->transformCollection($stocks),
-                'warehouses' => $this->warehouseTransformer->transformCollection($warehouses),
-                'routes' => $this->routeTransformer->transformCollection($routes)
+                'products' => $this->productTransformer->transformCollection($products->toArray()),
+                'customers'=> $this->customerTransformer->transformCollection($customers->toArray()),
+                'stocks'=> $this->stockTransformer->transformCollection($stocks->toArray()),
+                'warehouses' => $this->warehouseTransformer->transformCollection($warehouses->toArray()),
+                'routes' => $this->routeTransformer->transformCollection($routes->toArray())
         ]);
+
 
     }
 }

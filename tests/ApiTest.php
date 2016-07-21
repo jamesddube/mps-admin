@@ -17,6 +17,26 @@ class ApiCheckTest extends TestCase
         $this->see('success');
     }
 
+    public function testInvalidAccessToken()
+    {
+        $this->get('api/orders?access_token=k');
+
+
+        /*$this->call('get','/api/orders',
+            [
+                'access_token' => 'r',
+            ]
+        );*/
+        $this->seeJson(['message'=>'the access token provided is invalid']);
+    }
+
+    public function testAccessTokenRequired()
+    {
+        $this->visit('/api/orders');
+        //$this->seeJson(['message'=>'access token not found']);
+        $this->assertResponseStatus(401);
+    }
+
     public function testOauthBadCredentialsResponseCode()
     {
         $this->call('post','api/oauth/token');
@@ -42,21 +62,5 @@ class ApiCheckTest extends TestCase
         );
     }
 
-    public function testInvalidAccessToken()
-    {
-
-
-        $this->call('get','/api/orders',
-            [
-                'access_token' => 'random',
-            ]
-        );
-        $this->seeJson(['message'=>'the access token provided is invalid']);
-    }
-
-    public function testAccessTokenRequired()
-    {
-        $this->visit('api/orders');
-        $this->seeJson(['message'=>'access token not found']);
-    }
+  
 }

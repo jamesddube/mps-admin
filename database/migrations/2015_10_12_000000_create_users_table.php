@@ -23,10 +23,15 @@ class CreateUsersTable extends Migration
             $table->string('avatar',255);
             $table->string('password', 60);
             $table->integer('user_type_id')->unsigned();
+            $table->integer('route_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('user_type_id')
                 ->references('id')->on('user_types')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('route_id')
+                ->references('id')->on('routes')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -39,6 +44,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function ($table) {
+            $table->dropForeign(['user_type_id','route_id']);
+        });
+
         Schema::drop('users');
     }
 }

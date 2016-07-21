@@ -2,6 +2,7 @@
 
 
 use App\Promotion;
+use App\User;
 
 $api = app('Dingo\Api\Routing\Router');
 
@@ -17,6 +18,13 @@ Route::get('present',function(){
     //return $d->present()->see;
     //$o = new App\Mps\Presenters\Order();
     return $d->present()->see;
+});
+
+Route::post('orders/process','OrderController@process');
+
+
+Route::get('test',function(){
+    return View::make('js.index');
 });
 
 
@@ -44,6 +52,7 @@ Route::get('present',function(){
             Route::resource('orders', 'OrderController');
             Route::resource('products', 'ProductController');
             Route::resource('customers', 'CustomerController');
+            Route::resource('presellsheets', 'PresellSheetController');
             Route::resource('users', 'UserController');
             Route::get('salesreps', 'UserController@salesReps');
             Route::get('salesreps/{id}', 'UserController@salesRepsShow');
@@ -81,6 +90,7 @@ Route::get('present',function(){
         
             //Route for API Tokens
             $api->post('oauth/token', 'App\Http\Controllers\Api\OauthController@getToken');
+            $api->resource('presellsheets' , 'App\Http\Controllers\Api\PresellSheetController');
         
             $api->group(['middleware' => 'oauth'], function($api){
                 $api->resource('sample','App\Http\Controllers\Sample');
@@ -89,6 +99,7 @@ Route::get('present',function(){
                 $api->resource('/users' , 'App\Http\Controllers\Api\UserController');
                 $api->resource('/products' , 'App\Http\Controllers\Api\ProductController');
                 $api->resource('/customers' , 'App\Http\Controllers\Api\CustomerController');
+           
 
                 $api->any('sync','App\Http\Controllers\Api\SyncController@hardSync');
 
