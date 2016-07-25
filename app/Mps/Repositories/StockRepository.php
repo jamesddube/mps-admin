@@ -9,10 +9,19 @@
 namespace App\Mps\Repositories;
 
 
-use Bosnadev\Repositories\Eloquent\Repository;
 
-class StockRepository extends Repository
+use Prettus\Repository\Eloquent\BaseRepository;
+
+class StockRepository extends BaseRepository
 {
+    /**
+     *
+     */
+    public function boot(){
+        $this->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+    }
+
+
 
     /**
      * Specify Model class name

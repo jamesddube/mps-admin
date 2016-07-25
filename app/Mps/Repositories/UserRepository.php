@@ -7,24 +7,11 @@
  */
 
 namespace App\Mps\Repositories;
-use Bosnadev\Repositories\Eloquent\Repository;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class UserRepository extends Repository implements RepositoryInterface
+class UserRepository extends BaseRepository
 {
     public function model() {
         return 'App\User';
-    }
-
-
-    public function key()
-    {
-        return 'orders';
-    }
-
-    public function modelInstance()
-    {
-        // TODO: Implement modelInstance() method.
     }
 }

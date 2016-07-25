@@ -9,9 +9,10 @@
 namespace App\Mps\Repositories;
 
 
-use Bosnadev\Repositories\Eloquent\Repository;
 
-class PresellSheetRepository extends Repository
+use Prettus\Repository\Eloquent\BaseRepository;
+
+class PresellSheetRepository extends BaseRepository
 {
 
     /**
@@ -22,5 +23,9 @@ class PresellSheetRepository extends Repository
     public function model()
     {
         return 'App\PresellSheet';
+    }
+
+    public function boot(){
+        $this->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
     }
 }

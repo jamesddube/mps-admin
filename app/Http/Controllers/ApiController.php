@@ -9,21 +9,19 @@
 namespace App\Http\Controllers;
 
 
-use App\Customer;
-use App\Http\Requests\CreateOrderRequest;
+use App\Mps\Response\Response as ApiResponse;
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\Transformer;
 use App\Mps\Validators\CollectionValidator;
-use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 class ApiController extends Controller
 {
+    /** @var  ApiResponse */
+    protected $response;
 
     /** @var  CollectionValidator $validator */
     protected $validator;
@@ -33,20 +31,21 @@ class ApiController extends Controller
     /** @var  Transformer */
     protected $transformer;
 
-    /** @var  Repository $repository */
+    /** @var  BaseRepository $repository */
     protected $repository;
 
     /**
      * Api constructor.
-     * @param Repository $repository
+     * @param BaseRepository $repository
      * @param Transformer $transformer
      * @param CollectionValidator $collectionValidator
      */
-    public function __construct(Repository $repository, Transformer $transformer,CollectionValidator $collectionValidator)
+    public function __construct(BaseRepository $repository, Transformer $transformer,CollectionValidator $collectionValidator)
     {
         $this->transformer = $transformer;
         $this->repository = $repository;
         $this->validator = $collectionValidator;
+        $this->response = new ApiResponse();
     }
 
     /**
@@ -54,35 +53,36 @@ class ApiController extends Controller
      */
     public function index()
     {
-        $models = $this->repository->paginate(2);
+
+        $models = $this->repository->paginate(1000);
 
         if(! $models)
         {
-            throw new NotFoundHttpException('resources not found');
+            return $this->response->respondNotFound();
         }
 
-        return $this->respond(array_merge(['status_code'=>$this->getStatusCode()],$models->toArray()));
+        return $this->response->respond($models->toArray());
 
-        return array_merge(['status_code'=>$this->getStatusCode()],$models->toArray());
-
-        //maybe do a array_replace() on data key, so that we keep paginator data
-
-        $e = $models->toArray();
-
-        //dd(['models' => $models ,'data' => $e['data']]);
-
-        return $this->respondCollection($e['data']);
     }
 
+    /**
+     *
+     * Show the specified resource
+     *
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
-        $model = $this->repository->find($id);
+        try{
 
-        if(! $model)
-        {
-            throw new NotFoundHttpException('resource not found');
+            $model = $this->repository->find($id);
+            return $this->response->respond(['data'=>$model->toArray()]);
         }
-        return $this->respond($model);
+        catch (\Exception $e)
+        {
+            return $this->response->respondNotFound();
+        }
     }
 
     public function store(Request $request)
@@ -90,26 +90,26 @@ class ApiController extends Controller
 
         if($this->validator->validate())
         {
-            $array = $request->input($this->transformer->getKey());
+            $array = $request->all();
 
-            $this->repository->saveModel($array);
+            if($this->storeBatch($array)){
 
-            return $this->setStatusCode(201)->respond([
-                'message' => 'resource saved',
-                'status_code'=>$this->getStatusCode()
-            ]);
+                return $this->response->respondCreated();
+            };
+
+            return $this->response->respondWithError();
 
         }
         else
         {
             $errors = $this->validator->getErrors()->all();
             
-            return $this->respondWithValidationErrors($errors);
+            return $this->response->respondWithValidationErrors($errors);
         }
 
 
     }
-
+/*
     public function update()
     {
         $model = $this->repository->find('OD5000');
@@ -153,6 +153,19 @@ class ApiController extends Controller
         }
     }
 
+  */  public static function storeBatch(array $items)
+    {
+        $now = Carbon::now();
+        $items = collect($items)->map(function (array $data) use ($now) {
+            return array_merge([
+                'created_at' => $now,
+                'updated_at' => $now,
+            ], $data);
+        })->all();
+
+        return DB::table('orders')->insert($items);
+    }
+
     public function sync(Request $request)
     {
         return $request->all();
@@ -160,63 +173,6 @@ class ApiController extends Controller
             ->where('updated_at','>',Carbon::now())
             ->whereNotIn('id', ['OD5000'])->get();
         */
-    }
-
-
-    public function respond($data,$headers= [])
-    {
-        return response()->json($data,$this->getStatusCode(),$headers);
-    }
-
-    public function respondCollection($data)
-    {
-        return response()->json([
-            'status_code'=>$this->getStatusCode(),
-            $this->transformer->getKey() => $this->transformer->transformCollection($data),
-        ],$this->getStatusCode());
-    }
-
-    public function respondWithValidationErrors($errors)
-    {
-        $data=[];
-        foreach ($errors as $error)
-        {
-            $data[] = $error;
-        }
-        return $this->setStatusCode(422)->respond([
-
-                'message' => 'Validation Errors',
-                'errors'  => $data
-            ]);
-
-        //$this->respondWithError(['errors' => $data],400);
-
-    }
-
-    public function respondWithError($message = 'Internal Error',$statusCode = 500)
-    {
-        $this->setStatusCode($statusCode)->respond([
-                'error' => [
-                        'message' => $message
-                    ]]);
-    }
-
-    /**
-     * @param int $statusCode
-     * @return Api
-     */
-    public function setStatusCode($statusCode)
-    {
-        $this->statusCode = $statusCode;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
     }
 
 

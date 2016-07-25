@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\CustomerTransformer;
 use App\Mps\Validators\CustomerValidator;
-use App\Repositories\CustomerRepository;
+use App\Mps\Repositories\CustomerRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

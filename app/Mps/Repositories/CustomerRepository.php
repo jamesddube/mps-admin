@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Mps\Repositories;
-use Bosnadev\Repositories\Eloquent\Repository;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 
-class CustomerRepository extends Repository
+class CustomerRepository extends BaseRepository
 {
     public function model() {
         return 'App\Customer';

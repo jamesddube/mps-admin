@@ -47,17 +47,14 @@ class OrderController extends ApiController
                 }
             });
 
-            return $this->setStatusCode(201)->respond([
-                'message' => 'resource saved',
-                'status_code'=>$this->getStatusCode()
-            ]);
+            return $this->response->respondCreated("(".count($orders->all()).") orders saved");
 
         }
         else
         {
             $errors = $this->validator->getErrors()->all();
 
-            return $this->respondWithValidationErrors($errors);
+            return $this->response->respondWithValidationErrors($errors);
         }
     }
 }
