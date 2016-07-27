@@ -13,7 +13,7 @@ class Order extends Model
     protected $fillable =
         [
             'id',
-            'order_id',
+            'presell_sheet_id',
             'user_id',
             'customer_id',
             'order_status_id',
@@ -24,6 +24,12 @@ class Order extends Model
     public function lineItems()
     {
         return $this->hasMany('App\OrderDetail','order_id','id');
+    }
+    
+    public function process()
+    {
+        $this->order_status_id = 3;
+        $this->save();
     }
 
     public static function getByOrderId($id)

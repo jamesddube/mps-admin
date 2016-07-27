@@ -8,13 +8,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOrderRequest;
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\OrderTransformer;
-use App\Mps\Validators\CollectionValidator;
 use App\Mps\Validators\OrderValidator;
 use App\Order;
-use App\OrderDetail;
-use App\Repositories\OrderRepository;
+use App\Mps\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -54,10 +53,7 @@ class Sample extends ApiController
                   }
               });
 
-            return $this->setStatusCode(201)->respond([
-                'message' => 'resource saved',
-                'status_code'=>$this->getStatusCode()
-            ]);
+            return $this->response->respondCreated();
 
         }
         else
@@ -66,8 +62,13 @@ class Sample extends ApiController
 
              Log::debug($errors);
 
-            return $this->respondWithValidationErrors($errors);
+            return $this->response->respondWithValidationErrors($errors);
         }
     }
 
+    /** @return String */
+    protected function key()
+    {
+        return "orders";
+    }
 }

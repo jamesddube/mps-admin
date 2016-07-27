@@ -9,7 +9,9 @@
                     <a href="javascript:;"><img src="{{ url('assets/img/user-13.jpg')}}"  height="50" width="50" alt="user picture" /></a>
                 </div>
                 <div class="info">
-                    <?php  ?>
+                    <?php $user = Auth::user();
+                    echo $user->name." ".$user->surname;
+                    ?>
 
                     <small>Developer</small>
                 </div>
@@ -21,6 +23,7 @@
             <li class="nav-header">Navigation</li>
             <li class="active"><a href="{{ url('') }}"><i class="fa fa-laptop"></i> <span>Dashboard</span></a></li>
             <li><a href="{{ url('/salesreps') }}"><i class="fa fa-user"></i> <span>Sales Reps</span></a></li>
+            <li><a href="{{ url('/orders') }}"><i class="fa fa-laptop"></i> <span>Presell Sheets</span></a></li>
             <li><a href="{{ url('/orders') }}"><i class="fa fa-laptop"></i> <span>Orders</span></a></li>
             <li><a href="{{ url('/products') }}"><i class="fa fa-cube"></i> <span>Products</span></a></li>
             <li><a href="{{ url('/customers') }}"><i class="fa fa-building"></i> <span>Customers</span></a></li>

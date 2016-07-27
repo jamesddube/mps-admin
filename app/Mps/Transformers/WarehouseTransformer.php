@@ -9,8 +9,6 @@
 namespace App\Mps\Transformers;
 
 
-use App\Mps\Transformers\Transformer;
-
 class WarehouseTransformer extends Transformer
 {
     protected $transformKeys = [
@@ -18,10 +16,7 @@ class WarehouseTransformer extends Transformer
         'name'
     ];
 
-    public function transformCollection($models)
-    {
-        return $models->load('stocks.product');
-    }
+    
 
 
 }

@@ -127,7 +127,9 @@
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ url('assets/img/user-13.jpg')}}" alt="" />
-                        <span class="hidden-xs">Adam Schwartz</span> <b class="caret"></b>
+                        <span class="hidden-xs"><?php $user = Auth::user();
+                            echo $user->name." ".$user->surname;
+                            ?></span> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu animated fadeInLeft">
                         <li class="arrow"></li>

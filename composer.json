@@ -10,9 +10,9 @@
         "dingo/api": "1.0.*@dev",
         "bshaffer/oauth2-server-php": "^1.7",
         "bshaffer/oauth2-server-httpfoundation-bridge": "^1.1",
-        "laracasts/utilities": "^2.1",
         "lucadegasperi/oauth2-server-laravel": "5.1.*",
-        "bosnadev/repositories": " 0.*"
+        "bosnadev/repositories": " 0.*",
+        "spatie/laravel-blade-javascript": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

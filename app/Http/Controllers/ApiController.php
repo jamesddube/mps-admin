@@ -9,109 +9,191 @@
 namespace App\Http\Controllers;
 
 
-use App\Customer;
 use App\Http\Requests\CreateOrderRequest;
+use App\Mps\Response\Response as ApiResponse;
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\Transformer;
 use App\Mps\Validators\CollectionValidator;
-use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class ApiController extends Controller
+abstract class ApiController extends Controller
 {
+    /** @var  ApiResponse */
+    protected $response;
 
     /** @var  CollectionValidator $validator */
     protected $validator;
 
-    protected $statusCode = 200;
-
     /** @var  Transformer */
     protected $transformer;
 
-    /** @var  Repository $repository */
+    /** @var  BaseRepository $repository */
     protected $repository;
+
+    private $table;
+
+    /** @return String */
+    protected abstract function key();
 
     /**
      * Api constructor.
-     * @param Repository $repository
+     * @param BaseRepository $repository
      * @param Transformer $transformer
      * @param CollectionValidator $collectionValidator
      */
-    public function __construct(Repository $repository, Transformer $transformer,CollectionValidator $collectionValidator)
+    public function __construct(BaseRepository $repository, Transformer $transformer,CollectionValidator $collectionValidator)
     {
         $this->transformer = $transformer;
         $this->repository = $repository;
         $this->validator = $collectionValidator;
+        $this->response = new ApiResponse();
+
+        $this->table = $repository->makeModel()->getTable();
     }
 
     /**
+     *
+     * Show a listing of the resource
+     *
      * @return mixed
      */
     public function index()
     {
-        $models = $this->repository->all();
+
+        $models = $this->repository->paginate(1000);
 
         if(! $models)
         {
-            throw new NotFoundHttpException('resources not found');
+            return $this->response->respondNotFound();
         }
-        return $this->respondCollection($models);
+
+        return $this->response
+            //->setData($models->toArray())
+            ->respond('resource listing',200,$models->toArray());
+
     }
 
+    /**
+     *
+     * Show the specified resource
+     *
+     * @param $id
+     * @return mixed
+     *
+     */
     public function show($id)
     {
-        $model = $this->repository->find($id);
+        try{
 
-        if(! $model)
-        {
-            throw new NotFoundHttpException('resource not found');
+            $model = $this->repository->find($id);
+            return $this->response
+                ->setData($model->toArray())
+                ->respond('resource');
         }
-        return $this->respond($model);
+        catch (ModelNotFoundException $e)
+        {
+            return $this->response->respondNotFound();
+        }
+        catch (\Exception $e){
+            return $this->response->respondWithError($e->getMessage());
+        }
     }
 
+    /**
+     *
+     * Store a new resource to the database
+     *
+     * @param Request $request
+     * @return mixed
+     *
+     */
     public function store(Request $request)
     {
 
         if($this->validator->validate())
         {
-            $array = $request->input($this->transformer->getKey());
 
-            $this->repository->saveModel($array);
+            $array = $request->input($this->key());
 
-            return $this->setStatusCode(201)->respond([
-                'message' => 'resource saved',
-                'status_code'=>$this->getStatusCode()
-            ]);
+
+            if($this->storeBatch($array,$this->table)){
+
+                return $this->response->respondCreated();
+            };
+
+            return $this->response->respondWithError();
 
         }
         else
         {
             $errors = $this->validator->getErrors()->all();
             
-            return $this->respondWithValidationErrors($errors);
+            return $this->response->respondWithValidationErrors($errors);
         }
 
 
     }
 
-    public function update()
+    /**
+     *
+     * Update an existing resource
+     *
+     * @param Request $request
+     * @return ApiResponse|mixed
+     *
+     */
+    public function update(Request $request)
     {
-        $model = $this->repository->find('OD5000');
+        /** @var Model $model */
+        $model = $this->repository->find($request->input('id'));
 
-        $model->user_id = 90;
-        
+        $model->user_id = 11;
+
         if($this->validator->setArray($model->toArray())->validate())
         {
-            return $this->respond(['message' => 'we can save']);
+
+            if($model->update($request->all())) {
+                return $this->response->respondUpdated();
+            }
+            else{
+                return $this->response->respondWithError('resource not saved');
+            }
+
+        }
+        else{
+            return $this->response->respondWithValidationErrors($this->validator->getErrors()->all());
         }
 
-        return $this->respondWithValidationErrors($this->validator->getErrors()->all());
-        
+    }
+
+    /**
+     *
+     *  Delete a resource from the database
+     *
+     * @param $id
+     * @return mixed
+     * @internal param Request $request
+     */
+    public function destroy($id)
+    {
+        /** @var Model $resource */
+        $resource = $this->repository->find($id);
+
+        if($resource !== null){
+            if($resource->delete()){
+                return $this->response->respondDeleted();
+            }else{
+                return $this->response->respondWithError();
+            }
+        }
+        else{
+            return $this->response->respondNotFound('cannot delete a non existent resource');
+        }
     }
 
     public function storeCollection(Request $request)
@@ -142,71 +224,30 @@ class ApiController extends Controller
         }
     }
 
-    public function sync(Request $request)
-    {
-        return $request->all();
-        /*return Customer::select()
-            ->where('updated_at','>',Carbon::now())
-            ->whereNotIn('id', ['OD5000'])->get();
-        */
-    }
-
-
-    public function respond($data,$headers= [])
-    {
-        return response()->json($data,$this->getStatusCode(),$headers);
-    }
-
-    public function respondCollection($data)
-    {
-        return response()->json([
-            'status_code'=>$this->getStatusCode(),
-            $this->transformer->getKey() => $this->transformer->transformCollection($data),
-        ],$this->getStatusCode());
-    }
-
-    public function respondWithValidationErrors($errors)
-    {
-        $data=[];
-        foreach ($errors as $error)
+     public static function storeBatch(array $items,$table)
         {
-            $data[] = $error;
+           $now = Carbon::now();
+            $items = collect($items)->map(function (array $data) use ($now) {
+                return array_merge([
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], $data);
+            })->all();
+
+            //todo place inside transaction
+
+
+            return DB::table($table)->insert($items);
         }
-        return $this->setStatusCode(422)->respond([
 
-                'message' => 'Validation Errors',
-                'errors'  => $data
-            ]);
+        public function sync(Request $request)
+        {
+            return $request->all();
+            /*return Customer::select()
+                ->where('updated_at','>',Carbon::now())
+                ->whereNotIn('id', ['OD5000'])->get();
+            */
+        }
 
-        //$this->respondWithError(['errors' => $data],400);
 
     }
-
-    public function respondWithError($message = 'Internal Error',$statusCode = 500)
-    {
-        $this->setStatusCode($statusCode)->respond([
-                'error' => [
-                        'message' => $message
-                    ]]);
-    }
-
-    /**
-     * @param int $statusCode
-     * @return Api
-     */
-    public function setStatusCode($statusCode)
-    {
-        $this->statusCode = $statusCode;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
-    }
-
-
-}

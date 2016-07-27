@@ -1076,6 +1076,10 @@ legend {
     background: #f8b2b2
 }
 
+.alert.alert-green {
+    background: limegreen;
+}
+
 .alert.alert-warning {
     background: #ffead0
 }

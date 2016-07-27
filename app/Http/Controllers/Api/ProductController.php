@@ -13,7 +13,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\ApiController;
 use App\Mps\Transformers\ProductTransformer;
 use App\Mps\Validators\ProductValidator;
-use App\Repositories\ProductRepository;
+use App\Mps\Repositories\ProductRepository;
 use Bosnadev\Repositories\Eloquent\Repository;
 
 class ProductController extends ApiController
@@ -23,4 +23,9 @@ class ProductController extends ApiController
         parent::__construct($repository, $transformer, $collectionValidator);
     }
 
+    /** @return String */
+    protected function key()
+    {
+        // TODO: Implement key() method.
+    }
 }

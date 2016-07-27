@@ -6,6 +6,7 @@ use App\Http\Controllers\Api;
 use Closure;
 use Illuminate\Support\Facades\App;
 use OAuth2\HttpFoundationBridge\Request as OauthRequest;
+use OAuth2\HttpFoundationBridge\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -22,15 +23,15 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-       // return $next($request);
+       return $next($request);
        if(!$request->has('access_token'))
         {
-            throw new UnauthorizedHttpException('access token not found');
+            throw new UnauthorizedHttpException(null,'access token not found');
         }
 
         $req = Request::createFromGlobals();
         $brigedRequest = OauthRequest::createFromRequest($req);
-        $brigedResponse = new \OAuth2\HttpFoundationBridge\Response();
+        $brigedResponse = new Response();
 
         if(!$token = App::make('oauth')->getAccessTokenData($brigedRequest,$brigedResponse))
         {
@@ -40,17 +41,18 @@ class OauthMiddleware
             {
                 if($response->getParameter('error') == 'expired_token')
                 {
-                    throw new UnauthorizedHttpException("the access token has expired");
+                    throw new UnauthorizedHttpException(null,"the access token has expired");
                 }
 
-                throw new UnauthorizedHttpException('the access token provided is invalid');
+                throw new UnauthorizedHttpException(null,'the access token provided is invalid');
             }
         }
         else
         {
             $request['user_id'] = $token['user_id'];
+            return $next($request);
         }
 
-        return $next($request);
+        
     }
 }

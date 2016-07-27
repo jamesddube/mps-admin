@@ -6,14 +6,14 @@
  * Time: 2:24 PM
  */
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 
 
-use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class OrderRepository extends Repository
+class OrderRepository extends BaseRepository
 {
 
     /**

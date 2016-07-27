@@ -6,12 +6,13 @@
  * Time: 9:22 PM
  */
 
-namespace App\Repositories;
+namespace App\Mps\Repositories;
 
 
-use Bosnadev\Repositories\Eloquent\Repository;
 
-class ProductRepository extends Repository
+use Prettus\Repository\Eloquent\BaseRepository;
+
+class ProductRepository extends BaseRepository
 {
 
     /**

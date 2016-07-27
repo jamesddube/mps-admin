@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Intersect\Api\Controller\ApiController;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class SampleController extends  Controller
