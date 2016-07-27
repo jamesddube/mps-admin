@@ -9,4 +9,9 @@ use App\Http\Controllers\ApiController;
 class OrderDetailController extends ApiController
 {
 
+    /** @return String */
+    protected function key()
+    {
+        // TODO: Implement key() method.
+    }
 }

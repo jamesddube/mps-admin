@@ -11,7 +11,17 @@ namespace App\Mps\Response;
 
 class Response
 {
+    /**
+     *
+     * HTTP Status Code
+     *
+     * @var  $status_code int
+     */
     private $status_code;
+    
+    private $data = array();
+
+    private $validationErrors = array();
 
     /**
      * @return mixed
@@ -22,8 +32,12 @@ class Response
     }
 
     /**
+     *
+     * Sets the HTTP status code for the response
+     *
      * @param mixed $status_code
      * @return $this
+     *
      */
     public function setStatusCode($status_code)
     {
@@ -31,39 +45,93 @@ class Response
         
         return $this;
     }
-    
-    public function respondNotFound($msg = 'resource not found'){
-        return $this->respondWithError($msg,404);
+
+    /**
+     *
+     * Respond with a 404. The resource/model cannot be found in the database
+     *
+     * @param string $message
+     * @return mixed
+     *
+     */
+    public function respondNotFound($message = 'resource not found'){
+        return $this->respondWithError($message,404);
     }
-    
+
+    /**
+     *
+     * Respond with a 422. There were some validation errors on
+     * the input data
+     *
+     * @param $errors array
+     * @return mixed
+     *
+     */
     public function respondWithValidationErrors($errors)
     {
-        return $this->respondWithError('validation errors',422,$errors);
+        return $this->setValidationErrors($errors)->respondWithError('validation errors',422);
         
     }
-    
+
+    /**
+     *
+     * Generic error response. HTTP Status code of 500 by default
+     *
+     * @param string $message
+     * @param int $code
+     * @param array $data
+     * @return mixed
+     *
+     */
     public function respondWithError($message = 'an error occurred',$code = 500, $data = array())
     {
         $meta =[
             'status' => 'error',
             'message'=> $message,
             'status_code'=>$code,
-            'data' => $data
         ];
 
-        return $this->setStatusCode($code)->generalRespond(array_merge($meta));
+        if($this->hasValidationErrors()) {
+            $responseData = array_merge($meta,$this->getValidationErrors(),$data);
+        }
+        else{
+            $responseData = array_merge($meta,$data);
+        }
+
+        return $this->setStatusCode($code)->generalRespond($responseData);
+
     }
-    
+
+    /**
+     *
+     * Respond with a 204. The resource was updated
+     *
+     * @param string $message
+     * @return response
+     *
+     */
+    public function respondUpdated($message = 'resource updated')
+    {
+        return $this->respond($message,200);
+    }
+
+
     public function respond($message = 'request success',$code = 200, $data = array()){
         
         $meta =[
             'status' => 'success',
             'message'=> $message,
             'status_code'=>$code,
-            'data' => $data
         ];
-        
-        return $this->setStatusCode($code)->generalRespond(array_merge($meta));
+
+        if($this->hasData()) {
+            $responseData = array_merge($meta,$this->getData(),$data);
+        }
+        else{
+            $responseData = array_merge($meta,$data);
+        }
+
+        return $this->setStatusCode($code)->generalRespond($responseData);
     }
     
     public function respondCreated($msg = 'resource created'){
@@ -76,5 +144,58 @@ class Response
         return response()->json($data,$this->getStatusCode());
         
     }
+
+    /**
+     * @param array $data
+     * @return Response
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    public function getData()
+    {
+        return array('data' => $this->data);
+    }
+
+
+    /** @return boolean */
+    public function hasData(){
+        return  (count($this->getData()['data'])) > 0 ;
+    }
+
+    /** @return boolean */
+    public function hasValidationErrors(){
+        return  (count($this->getValidationErrors()['validation_errors'])) > 0 ;
+    }
+
+    /**
+     * @param array $validationErrors
+     * @return Response
+     */
+    public function setValidationErrors($validationErrors)
+    {
+        $this->validationErrors = $validationErrors;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getValidationErrors()
+    {
+        return array('validation_errors' => $this->validationErrors);
+    }
+
+    /**
+     * 
+     */
+    public function respondDeleted()
+    {
+        return $this->respond('the resource was deleted');
+    }
+
 
 }

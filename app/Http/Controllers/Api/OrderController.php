@@ -24,37 +24,9 @@ class OrderController extends ApiController
         parent::__construct($repository,$transformer,$validator);
     }
 
-    public function store(Request $request)
+    /** @return String */
+    protected function key()
     {
-        if($this->validator->validate())
-        {
-
-            $orders = Helpers::getModelCollection(
-                'App\Order',
-                $request->input('orders')
-            );
-            $details = Helpers::getModelCollection(
-                'App\OrderDetail',
-                $request->input('order_details')
-            );
-
-            DB::transaction(function () use ($orders,$details){
-                foreach ($orders as $order) {
-                    $order->save();
-                }
-                foreach ($details as $detail) {
-                    $detail->save();
-                }
-            });
-
-            return $this->response->respondCreated("(".count($orders->all()).") orders saved");
-
-        }
-        else
-        {
-            $errors = $this->validator->getErrors()->all();
-
-            return $this->response->respondWithValidationErrors($errors);
-        }
+        return "orders";
     }
 }

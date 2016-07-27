@@ -21,6 +21,7 @@ Route::get('present',function(){
 });
 
 Route::post('orders/process','OrderController@process');
+Route::post('sync','\App\Http\Controllers\Api\CustomerController@sync');
 
 
 Route::get('test',function(){

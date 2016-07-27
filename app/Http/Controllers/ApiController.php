@@ -9,16 +9,19 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\CreateOrderRequest;
 use App\Mps\Response\Response as ApiResponse;
 use App\Mps\Support\Helpers;
 use App\Mps\Transformers\Transformer;
 use App\Mps\Validators\CollectionValidator;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class ApiController extends Controller
+abstract class ApiController extends Controller
 {
     /** @var  ApiResponse */
     protected $response;
@@ -26,13 +29,16 @@ class ApiController extends Controller
     /** @var  CollectionValidator $validator */
     protected $validator;
 
-    protected $statusCode = 200;
-
     /** @var  Transformer */
     protected $transformer;
 
     /** @var  BaseRepository $repository */
     protected $repository;
+
+    private $table;
+
+    /** @return String */
+    protected abstract function key();
 
     /**
      * Api constructor.
@@ -46,9 +52,14 @@ class ApiController extends Controller
         $this->repository = $repository;
         $this->validator = $collectionValidator;
         $this->response = new ApiResponse();
+
+        $this->table = $repository->makeModel()->getTable();
     }
 
     /**
+     *
+     * Show a listing of the resource
+     *
      * @return mixed
      */
     public function index()
@@ -61,7 +72,9 @@ class ApiController extends Controller
             return $this->response->respondNotFound();
         }
 
-        return $this->response->respond($models->toArray());
+        return $this->response
+            //->setData($models->toArray())
+            ->respond('resource listing',200,$models->toArray());
 
     }
 
@@ -71,28 +84,44 @@ class ApiController extends Controller
      *
      * @param $id
      * @return mixed
+     *
      */
     public function show($id)
     {
         try{
 
             $model = $this->repository->find($id);
-            return $this->response->respond(['data'=>$model->toArray()]);
+            return $this->response
+                ->setData($model->toArray())
+                ->respond('resource');
         }
-        catch (\Exception $e)
+        catch (ModelNotFoundException $e)
         {
             return $this->response->respondNotFound();
         }
+        catch (\Exception $e){
+            return $this->response->respondWithError($e->getMessage());
+        }
     }
 
+    /**
+     *
+     * Store a new resource to the database
+     *
+     * @param Request $request
+     * @return mixed
+     *
+     */
     public function store(Request $request)
     {
 
         if($this->validator->validate())
         {
-            $array = $request->all();
 
-            if($this->storeBatch($array)){
+            $array = $request->input($this->key());
+
+
+            if($this->storeBatch($array,$this->table)){
 
                 return $this->response->respondCreated();
             };
@@ -109,20 +138,62 @@ class ApiController extends Controller
 
 
     }
-/*
-    public function update()
-    {
-        $model = $this->repository->find('OD5000');
 
-        $model->user_id = 90;
-        
+    /**
+     *
+     * Update an existing resource
+     *
+     * @param Request $request
+     * @return ApiResponse|mixed
+     *
+     */
+    public function update(Request $request)
+    {
+        /** @var Model $model */
+        $model = $this->repository->find($request->input('id'));
+
+        $model->user_id = 11;
+
         if($this->validator->setArray($model->toArray())->validate())
         {
-            return $this->respond(['message' => 'we can save']);
+
+            if($model->update($request->all())) {
+                return $this->response->respondUpdated();
+            }
+            else{
+                return $this->response->respondWithError('resource not saved');
+            }
+
+        }
+        else{
+            return $this->response->respondWithValidationErrors($this->validator->getErrors()->all());
         }
 
-        return $this->respondWithValidationErrors($this->validator->getErrors()->all());
-        
+    }
+
+    /**
+     *
+     *  Delete a resource from the database
+     *
+     * @param $id
+     * @return mixed
+     * @internal param Request $request
+     */
+    public function destroy($id)
+    {
+        /** @var Model $resource */
+        $resource = $this->repository->find($id);
+
+        if($resource !== null){
+            if($resource->delete()){
+                return $this->response->respondDeleted();
+            }else{
+                return $this->response->respondWithError();
+            }
+        }
+        else{
+            return $this->response->respondNotFound('cannot delete a non existent resource');
+        }
     }
 
     public function storeCollection(Request $request)
@@ -153,27 +224,30 @@ class ApiController extends Controller
         }
     }
 
-  */  public static function storeBatch(array $items)
-    {
-        $now = Carbon::now();
-        $items = collect($items)->map(function (array $data) use ($now) {
-            return array_merge([
-                'created_at' => $now,
-                'updated_at' => $now,
-            ], $data);
-        })->all();
+     public static function storeBatch(array $items,$table)
+        {
+           $now = Carbon::now();
+            $items = collect($items)->map(function (array $data) use ($now) {
+                return array_merge([
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], $data);
+            })->all();
 
-        return DB::table('orders')->insert($items);
+            //todo place inside transaction
+
+
+            return DB::table($table)->insert($items);
+        }
+
+        public function sync(Request $request)
+        {
+            return $request->all();
+            /*return Customer::select()
+                ->where('updated_at','>',Carbon::now())
+                ->whereNotIn('id', ['OD5000'])->get();
+            */
+        }
+
+
     }
-
-    public function sync(Request $request)
-    {
-        return $request->all();
-        /*return Customer::select()
-            ->where('updated_at','>',Carbon::now())
-            ->whereNotIn('id', ['OD5000'])->get();
-        */
-    }
-
-
-}

@@ -47,4 +47,9 @@ class PresellSheetController extends ApiController
     }
 
 
+    /** @return String */
+    protected function key()
+    {
+        return "presell_sheets";
+    }
 }

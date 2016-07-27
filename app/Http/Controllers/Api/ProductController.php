@@ -23,4 +23,9 @@ class ProductController extends ApiController
         parent::__construct($repository, $transformer, $collectionValidator);
     }
 
+    /** @return String */
+    protected function key()
+    {
+        // TODO: Implement key() method.
+    }
 }
