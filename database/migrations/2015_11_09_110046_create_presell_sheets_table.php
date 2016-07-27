@@ -21,6 +21,7 @@ class CreatePresellSheetsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('presell_sheet_status_id')->unsigned();
             $table->timestamps();
+            $table->timestamp('deleted_at');
             $table->foreign('presell_sheet_status_id')
                 ->references('id')->on('presell_sheet_status')
                 ->onUpdate('cascade')

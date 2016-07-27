@@ -18,6 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('order_id');
             $table->string('product_id');
             $table->integer('quantity');
+            $table->timestamp('deleted_at');
             $table->timestamps();
             $table->foreign('order_id')
                 ->references('id')->on('orders')
