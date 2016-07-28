@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->integer('user_type_id')->unsigned();
             $table->integer('route_id')->unsigned();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('user_type_id')

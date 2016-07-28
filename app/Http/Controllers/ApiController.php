@@ -154,7 +154,6 @@ abstract class ApiController extends Controller
 
         if($this->validator->setArray($model->toArray())->validate())
         {
-
             if($model->update($request->all())) {
                 return $this->response->respondUpdated();
             }

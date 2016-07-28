@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('sync_status');
             $table->timestamp('order_date');
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->primary('id');
             $table->foreign('user_id')
                 ->references('id')->on('users')

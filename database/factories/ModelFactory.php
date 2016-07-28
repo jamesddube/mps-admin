@@ -23,14 +23,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
-    $c = \App\Customer::all('id');
-    $ps = \App\PresellSheet::all('id');
-    $id = $c[ rand(0, (count($c) - 1)) ]->id;
-    $pid = $ps[ rand(0, (count($ps) - 1)) ]->id;
+    $c = \App\Customer::first();
+    $ps = \App\PresellSheet::first();
+
     return [
         "id"        => $faker->numerify('OD-########'),
-        "presell_sheet_id"     => $pid,
-        "customer_id"     => $id,
+        "presell_sheet_id"     => $ps->id,
+        "customer_id"     => $c->id,
         "user_id"         => 2,
         "order_date"      =>date('Y-m-d'),
         "order_status_id" => $faker->randomElement($array = [1, 2, 3]),
@@ -97,8 +96,6 @@ $factory->define(App\Stock::class, function (Faker\Generator $faker) {
 $factory->define(App\PresellSheet::class,function(Faker\Generator $faker){
     
     $user = App\User::first();
-    
-    dd($user);
     
     return [
         'id' => $faker->numerify('PS-######'),
