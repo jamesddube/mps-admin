@@ -49,13 +49,11 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('presell_sheets', function ($table) {
-            $table->dropForeign(['presell_sheet_status_id','user_id','route_id']);
+        Schema::table('orders', function ($table) {
+            $table->dropForeign(['presell_sheet_id']);
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['route_id']);
         });
 
-        Schema::drop('presell_sheets');
         Schema::drop('orders');
     }
 }

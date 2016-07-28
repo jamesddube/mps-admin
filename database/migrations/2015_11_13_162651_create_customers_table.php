@@ -46,7 +46,10 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('customers', function ($table) {
+            $table->dropForeign(['customer_status_id']);
+            $table->dropForeign(['customer_type_id']);
+        });
         Schema::drop('customers');
     }
 }

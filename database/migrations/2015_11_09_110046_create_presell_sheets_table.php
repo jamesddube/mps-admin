@@ -19,10 +19,10 @@ class CreatePresellSheetsTable extends Migration
             $table->string('id');
             $table->integer('route_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('presell_sheet_status_id')->unsigned();
+            $table->integer('status_id')->unsigned();
             $table->timestamps();
             $table->timestamp('deleted_at');
-            $table->foreign('presell_sheet_status_id')
+            $table->foreign('status_id')
                 ->references('id')->on('presell_sheet_status')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
@@ -46,7 +46,7 @@ class CreatePresellSheetsTable extends Migration
     public function down()
     {
         Schema::table('presell_sheets', function ($table) {
-            $table->dropForeign(['presell_sheet_status_id']);
+            $table->dropForeign(['status_id']);
             $table->dropForeign(['user_id']);
             $table->dropForeign(['route_id']);
         });

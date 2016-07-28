@@ -143,7 +143,7 @@ abstract class ApiController extends Controller
      *
      * Update an existing resource
      *
-     * @param Request $request
+     * @param Request $request ID of the resource to be updated
      * @return ApiResponse|mixed
      *
      */
@@ -151,8 +151,6 @@ abstract class ApiController extends Controller
     {
         /** @var Model $model */
         $model = $this->repository->find($request->input('id'));
-
-        $model->user_id = 11;
 
         if($this->validator->setArray($model->toArray())->validate())
         {
@@ -175,7 +173,7 @@ abstract class ApiController extends Controller
      *
      *  Delete a resource from the database
      *
-     * @param $id
+     * @param String $id ID of the resource to be updated
      * @return mixed
      * @internal param Request $request
      */

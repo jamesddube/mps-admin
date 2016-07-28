@@ -46,7 +46,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function ($table) {
-            $table->dropForeign(['user_type_id','route_id']);
+            $table->dropForeign(['route_id']);
+            $table->dropForeign(['user_type_id']);
         });
 
         Schema::drop('users');

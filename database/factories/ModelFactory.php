@@ -98,11 +98,13 @@ $factory->define(App\PresellSheet::class,function(Faker\Generator $faker){
     
     $user = App\User::first();
     
+    dd($user);
+    
     return [
         'id' => $faker->numerify('PS-######'),
         'route_id' => $user->route_id,
         'user_id' =>$user->id,
-        'presell_sheet_status_id' =>1
+        'status_id' =>1
         
     ];
 });
