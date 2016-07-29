@@ -40,12 +40,15 @@ class DatabaseSeeder extends Seeder
 //        dd(factory(App\OrderDetail::class, 2)->make());
         
        
-
+        echo "seeding customers...\n";
         factory(App\Customer::class, 100)->create();
-       
+        echo "seeding users...\n";
         factory(App\User::class, 2)->create();
+        echo "seeding presell sheets...\n";
         factory(App\PresellSheet::class,5)->create();
+        echo "seeding products...\n";
         factory(App\Product::class, 50)->create();
+        echo "seeding orders...\n";
         factory(App\Order::class, 6)->make()
             ->each(function($o){
                 

@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('sync_status');
             $table->timestamp('order_date');
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->primary('id');
             $table->foreign('user_id')
                 ->references('id')->on('users')
@@ -49,13 +49,11 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('presell_sheets', function ($table) {
-            $table->dropForeign(['presell_sheet_status_id','user_id','route_id']);
+        Schema::table('orders', function ($table) {
+            $table->dropForeign(['presell_sheet_id']);
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['route_id']);
         });
 
-        Schema::drop('presell_sheets');
         Schema::drop('orders');
     }
 }

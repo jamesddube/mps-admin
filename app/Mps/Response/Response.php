@@ -64,7 +64,7 @@ class Response
      * the input data
      *
      * @param $errors array
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse
      *
      */
     public function respondWithValidationErrors($errors)
@@ -80,7 +80,7 @@ class Response
      * @param string $message
      * @param int $code
      * @param array $data
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse
      *
      */
     public function respondWithError($message = 'an error occurred',$code = 500, $data = array())
@@ -107,7 +107,7 @@ class Response
      * Respond with a 204. The resource was updated
      *
      * @param string $message
-     * @return response
+     * @return \Illuminate\Http\JsonResponse
      *
      */
     public function respondUpdated($message = 'resource updated')
@@ -115,7 +115,16 @@ class Response
         return $this->respond($message,200);
     }
 
-
+    /**
+     *
+     * Generic response for a successful response. Default HTTP status code is 200
+     *
+     * @param string $message
+     * @param int $code
+     * @param array $data
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
     public function respond($message = 'request success',$code = 200, $data = array()){
         
         $meta =[
@@ -138,7 +147,7 @@ class Response
         return $this->respond($msg,201);
     }
     
-    private function generalRespond($data)
+    protected function generalRespond($data)
     {
         
         return response()->json($data,$this->getStatusCode());

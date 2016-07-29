@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->integer('user_type_id')->unsigned();
             $table->integer('route_id')->unsigned();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('user_type_id')
@@ -46,7 +46,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function ($table) {
-            $table->dropForeign(['user_type_id','route_id']);
+            $table->dropForeign(['route_id']);
+            $table->dropForeign(['user_type_id']);
         });
 
         Schema::drop('users');

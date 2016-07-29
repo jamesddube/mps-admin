@@ -26,6 +26,6 @@ class CreateWarehouseTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('warehouses');
     }
 }
