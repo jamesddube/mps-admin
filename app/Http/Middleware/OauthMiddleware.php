@@ -8,11 +8,30 @@ use Illuminate\Support\Facades\App;
 use OAuth2\HttpFoundationBridge\Request as OauthRequest;
 use OAuth2\HttpFoundationBridge\Response;
 use Symfony\Component\HttpFoundation\Request;
+use \App\Mps\Response\Response as ApiResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class OauthMiddleware
 {
+    /** @var  ApiResponse $response */
+    private $response;
+
+    /** @var Api\OauthController $controller */
+    private $controller;
+
+    /**
+     * OauthMiddleware constructor.
+     * @param ApiResponse $apiResponse
+     * @param Api\OauthController $controller
+     */
+    public function __construct(ApiResponse $apiResponse, Api\OauthController $controller)
+    {
+        $this->response = $apiResponse;
+        $this->controller = $controller;
+    }
+
+
     /**
      * Handle an incoming request.
      *
@@ -23,10 +42,16 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-       return $next($request);
+
+        if($this->controller->isValidToken()){
+            return $next($request);
+        }else{
+            return $this->controller->getError();//$this->controller->getError();
+        }
+       /*//return $next($request);
        if(!$request->has('access_token'))
         {
-            throw new UnauthorizedHttpException(null,'access token not found');
+            return $this->response->respondWithError('access token not found',401);
         }
 
         $req = Request::createFromGlobals();
@@ -44,7 +69,8 @@ class OauthMiddleware
                     throw new UnauthorizedHttpException(null,"the access token has expired");
                 }
 
-                throw new UnauthorizedHttpException(null,'the access token provided is invalid');
+                return $this->response->respondWithError('the access token provided is invalid',401);
+
             }
         }
         else
@@ -52,6 +78,8 @@ class OauthMiddleware
             $request['user_id'] = $token['user_id'];
             return $next($request);
         }
+
+        return $next($request);*/
 
         
     }
